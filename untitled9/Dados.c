@@ -90,7 +90,8 @@ ESTADO *inicializar_estado() {
     e -> tab[7][5] = VAZIO;
     e -> tab[7][6] = VAZIO;
     e -> tab[7][7] = VAZIO;
-    e -> ultima_jogada ;
+    e -> ultima_jogada.coluna = 5;
+    e -> ultima_jogada.linha = 4;
     e -> jogador_atual = 1;
     e -> num_jogadas = 0;
     return e;
