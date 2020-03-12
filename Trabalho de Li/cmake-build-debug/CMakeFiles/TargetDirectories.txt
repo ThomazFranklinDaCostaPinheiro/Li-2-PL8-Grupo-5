@@ -1,0 +1,3 @@
+C:/Users/Thomaz/CLionProjects/Trabalho de Li/cmake-build-debug/CMakeFiles/Trabalho_de_Li.dir
+C:/Users/Thomaz/CLionProjects/Trabalho de Li/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Thomaz/CLionProjects/Trabalho de Li/cmake-build-debug/CMakeFiles/rebuild_cache.dir
