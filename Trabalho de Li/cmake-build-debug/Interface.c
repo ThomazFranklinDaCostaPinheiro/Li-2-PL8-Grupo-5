@@ -5,6 +5,7 @@
 #include "Interface.h"
 #include <string.h>
 #include <stdio.h>
+#include "Dados.h"
 
 void mostrar_tabuleiro(ESTADO estado);
 
