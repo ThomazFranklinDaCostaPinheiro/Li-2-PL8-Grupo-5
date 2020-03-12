@@ -1,4 +1,4 @@
-# Projeto-Li-II-Grupo-5
+# Projeto Li II Grupo 5
 
 Jogo Rastros:
 Trabalho de laboratórios de Informática II, que tem o intuíto de criar um jogo chamado Rastros.
