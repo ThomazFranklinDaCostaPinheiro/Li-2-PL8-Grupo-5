@@ -38,7 +38,18 @@ int obter_jogador_atual(ESTADO *estado){
     return x;
 }
 
-int obter_numero_de_jogadas(ESTADO *estado);
+int obter_numero_de_jogadas(ESTADO *estado){
     int y;
     y = estado.num_jogadas;
     return y;
+}
+
+CASA obter_estado_casa(ESTADO *e, COORDENADA c){
+    int x;
+    int y;
+    y = c.linha;
+    x = c.coluna;
+    CASA casa;
+    casa = tab[x][y];
+    return casa;
+}
