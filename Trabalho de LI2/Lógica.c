@@ -2,7 +2,7 @@
 // Created by Thomaz on 12/03/2020.
 //
 
-#include "Lógica.h"
+#include "Logica.h"
 #include "Dados.h"
 #include <stdio.h>
 
@@ -17,6 +17,6 @@ int jogar(ESTADO *e, COORDENADA c) {
     int co;
     l = c.linha;
     co = c.coluna;
-    e->tab[c][l] = BRANCA;
+    e->tab[co][l] = BRANCA;
     return 1;
 }
