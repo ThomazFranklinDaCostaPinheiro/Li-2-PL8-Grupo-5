@@ -18,12 +18,12 @@ ESTADO *inicializar_estado() {
         i2++;
     }
     e -> ultima_jogada.coluna = 4;
-    e -> ultima_jogada.linha = 3;
+    e -> ultima_jogada.linha = 4;
     int i1 = 0;
     while (i1 < 32) {
-        e -> jogadas[i1].jogador1.linha = 3;
+        e -> jogadas[i1].jogador1.linha = 4;
         e -> jogadas[i1].jogador1.coluna = 4;
-        e -> jogadas[i1].jogador2.linha = 3;
+        e -> jogadas[i1].jogador2.linha = 4;
         e -> jogadas[i1].jogador2.coluna = 4;
         i1++;
     }

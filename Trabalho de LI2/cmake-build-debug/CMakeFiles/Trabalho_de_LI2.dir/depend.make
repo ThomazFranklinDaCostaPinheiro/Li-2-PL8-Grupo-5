@@ -8,12 +8,12 @@ CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj: ../Dados.h
 CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj: ../Interface.c
 CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj: ../Interface.h
 
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj: ../Dados.h
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj: ../Lógica.c
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj: ../Lógica.h
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj: ../Dados.h
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj: ../Logica.c
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj: ../Logica.h
 
 CMakeFiles/Trabalho_de_LI2.dir/main.c.obj: ../Dados.h
 CMakeFiles/Trabalho_de_LI2.dir/main.c.obj: ../Interface.h
-CMakeFiles/Trabalho_de_LI2.dir/main.c.obj: ../Lógica.h
+CMakeFiles/Trabalho_de_LI2.dir/main.c.obj: ../Logica.h
 CMakeFiles/Trabalho_de_LI2.dir/main.c.obj: ../main.c
 

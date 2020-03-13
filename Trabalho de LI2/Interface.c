@@ -17,12 +17,16 @@ void mostrar_tabuleiro(ESTADO estado){
     while (il < 8){
         int ic = 0;
         while (ic < 8){
-            if (estado.tab[il][ic] == VAZIO)
-                printf(".");
+            if ((ic == 0) && (il == 7))
+                printf("1 ");
+            else if ((ic == 7) && (il == 0))
+                printf("2");
+            else if (estado.tab[il][ic] == VAZIO)
+                printf(". ");
             else if (estado.tab[il][ic] == BRANCA)
-                printf("*");
+                printf("* ");
             else
-                printf("#");
+                printf("# ");
             ic++;
         }
         printf("\n");
