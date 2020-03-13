@@ -21,6 +21,7 @@ void mostrar_tabuleiro(ESTADO estado){
                 printf("#");
             ic++;
         }
+        printf("\n");
         il++;
     }
 }
