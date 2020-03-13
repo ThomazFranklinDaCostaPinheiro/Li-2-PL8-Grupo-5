@@ -1,0 +1,52 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.c
+Dados.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.h
+stdio.h
+-
+stdlib.h
+-
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.h
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Interface.c
+Interface.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Interface.h
+string.h
+-
+stdio.h
+-
+Dados.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.h
+string.h
+-
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Interface.h
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Lógica.c
+Lógica.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Lógica.h
+Dados.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.h
+stdio.h
+-
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/Lógica.h
+
+C:/Users/danie/CLionProjects/Trabalho de LI2/main.c
+stdio.h
+-
+Dados.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.h
+Lógica.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Lógica.h
+Interface.h
+C:/Users/danie/CLionProjects/Trabalho de LI2/Interface.h
+
