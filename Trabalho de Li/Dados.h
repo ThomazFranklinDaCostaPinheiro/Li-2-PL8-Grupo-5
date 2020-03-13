@@ -23,10 +23,5 @@ typedef struct {
     int jogador_atual;
 } ESTADO;
 
-ESTADO *inicializar_estado();
-int obter_jogador_atual(ESTADO *estado);
-int obter_numero_de_jogadas(ESTADO *estado);
-int obter_estado_casa(ESTADO *e, COORDENADA c);
-
-
 #endif //TRABALHO_DE_LI_DADOS_H
+
