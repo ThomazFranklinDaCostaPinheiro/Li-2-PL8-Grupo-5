@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include "Dados.h"
-#include "Lógica.h"
+#include "Logica.h"
 #include "Interface.h"
 
-interpretador(ESTADO *);
 
 int main() {
     ESTADO *e = inicializar_estado();
