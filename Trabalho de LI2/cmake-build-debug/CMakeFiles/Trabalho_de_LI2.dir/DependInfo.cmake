@@ -6,7 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/danie/CLionProjects/Trabalho de LI2/Dados.c" "C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj"
   "C:/Users/danie/CLionProjects/Trabalho de LI2/Interface.c" "C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj"
-  "C:/Users/danie/CLionProjects/Trabalho de LI2/Lógica.c" "C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj"
+  "C:/Users/danie/CLionProjects/Trabalho de LI2/Logica.c" "C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj"
   "C:/Users/danie/CLionProjects/Trabalho de LI2/main.c" "C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

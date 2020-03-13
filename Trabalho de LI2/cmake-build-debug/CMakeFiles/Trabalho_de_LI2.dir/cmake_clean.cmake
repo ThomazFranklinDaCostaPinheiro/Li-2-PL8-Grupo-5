@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj"
   "CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj"
-  "CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj"
+  "CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj"
   "CMakeFiles/Trabalho_de_LI2.dir/main.c.obj"
   "Trabalho_de_LI2.exe"
   "Trabalho_de_LI2.exe.manifest"

@@ -69,18 +69,18 @@ CMakeFiles/Trabalho_de_LI2.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Trabalho_de_LI2.dir/main.c.s"
 	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\danie\CLionProjects\Trabalho de LI2\main.c" -o CMakeFiles\Trabalho_de_LI2.dir\main.c.s
 
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj: CMakeFiles/Trabalho_de_LI2.dir/flags.make
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj: ../Lógica.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\danie\CLionProjects\Trabalho de LI2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj"
-	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Trabalho_de_LI2.dir\Lógica.c.obj   -c "C:\Users\danie\CLionProjects\Trabalho de LI2\Lógica.c"
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj: CMakeFiles/Trabalho_de_LI2.dir/flags.make
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj: ../Logica.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\danie\CLionProjects\Trabalho de LI2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj"
+	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Trabalho_de_LI2.dir\Logica.c.obj   -c "C:\Users\danie\CLionProjects\Trabalho de LI2\Logica.c"
 
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.i"
-	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\danie\CLionProjects\Trabalho de LI2\Lógica.c" > CMakeFiles\Trabalho_de_LI2.dir\Lógica.c.i
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Trabalho_de_LI2.dir/Logica.c.i"
+	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\danie\CLionProjects\Trabalho de LI2\Logica.c" > CMakeFiles\Trabalho_de_LI2.dir\Logica.c.i
 
-CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.s"
-	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\danie\CLionProjects\Trabalho de LI2\Lógica.c" -o CMakeFiles\Trabalho_de_LI2.dir\Lógica.c.s
+CMakeFiles/Trabalho_de_LI2.dir/Logica.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Trabalho_de_LI2.dir/Logica.c.s"
+	C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\danie\CLionProjects\Trabalho de LI2\Logica.c" -o CMakeFiles\Trabalho_de_LI2.dir\Logica.c.s
 
 CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj: CMakeFiles/Trabalho_de_LI2.dir/flags.make
 CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj: ../Dados.c
@@ -111,7 +111,7 @@ CMakeFiles/Trabalho_de_LI2.dir/Interface.c.s: cmake_force
 # Object files for target Trabalho_de_LI2
 Trabalho_de_LI2_OBJECTS = \
 "CMakeFiles/Trabalho_de_LI2.dir/main.c.obj" \
-"CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj" \
+"CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj" \
 "CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj" \
 "CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj"
 
@@ -119,7 +119,7 @@ Trabalho_de_LI2_OBJECTS = \
 Trabalho_de_LI2_EXTERNAL_OBJECTS =
 
 Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/main.c.obj
-Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj
+Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj
 Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/Dados.c.obj
 Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/Interface.c.obj
 Trabalho_de_LI2.exe: CMakeFiles/Trabalho_de_LI2.dir/build.make

@@ -176,32 +176,32 @@ Interface.c.s:
 	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Interface.c.s
 .PHONY : Interface.c.s
 
-Lógica.obj: Lógica.c.obj
+Logica.obj: Logica.c.obj
 
-.PHONY : Lógica.obj
+.PHONY : Logica.obj
 
 # target to build an object file
-Lógica.c.obj:
-	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.obj
-.PHONY : Lógica.c.obj
+Logica.c.obj:
+	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Logica.c.obj
+.PHONY : Logica.c.obj
 
-Lógica.i: Lógica.c.i
+Logica.i: Logica.c.i
 
-.PHONY : Lógica.i
+.PHONY : Logica.i
 
 # target to preprocess a source file
-Lógica.c.i:
-	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.i
-.PHONY : Lógica.c.i
+Logica.c.i:
+	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Logica.c.i
+.PHONY : Logica.c.i
 
-Lógica.s: Lógica.c.s
+Logica.s: Logica.c.s
 
-.PHONY : Lógica.s
+.PHONY : Logica.s
 
 # target to generate assembly for a file
-Lógica.c.s:
-	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Lógica.c.s
-.PHONY : Lógica.c.s
+Logica.c.s:
+	$(MAKE) -f CMakeFiles\Trabalho_de_LI2.dir\build.make CMakeFiles/Trabalho_de_LI2.dir/Logica.c.s
+.PHONY : Logica.c.s
 
 main.obj: main.c.obj
 
@@ -245,9 +245,9 @@ help:
 	@echo ... Interface.obj
 	@echo ... Interface.i
 	@echo ... Interface.s
-	@echo ... Lógica.obj
-	@echo ... Lógica.i
-	@echo ... Lógica.s
+	@echo ... Logica.obj
+	@echo ... Logica.i
+	@echo ... Logica.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
