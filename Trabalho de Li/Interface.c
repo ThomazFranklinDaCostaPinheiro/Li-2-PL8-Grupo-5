@@ -8,7 +8,22 @@
 #include "Dados.h"
 #define BUF_SIZE 1024
 
-void mostrar_tabuleiro(ESTADO estado);
+void mostrar_tabuleiro(ESTADO estado){
+    int il = 0;
+    while (il < 8){
+        int ic = 0;
+        while (ic < 8){
+            if (estado.tab[il][ic] == VAZIO)
+                printf(".");
+            else if (estado.tab[il][ic] == BRANCA)
+                printf("*");
+            else
+                printf("#");
+            ic++;
+        }
+        il++;
+    }
+}
 
 int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
