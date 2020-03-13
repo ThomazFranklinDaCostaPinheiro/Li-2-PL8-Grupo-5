@@ -34,22 +34,22 @@ ESTADO *inicializar_estado() {
 
 int obter_jogador_atual(ESTADO *estado){
     int x;
-    x = estado.jogador_atual;
+    x = estado->jogador_atual;
     return x;
 }
 
 int obter_numero_de_jogadas(ESTADO *estado){
     int y;
-    y = estado.num_jogadas;
+    y = estado->num_jogadas;
     return y;
 }
 
 CASA obter_estado_casa(ESTADO *e, COORDENADA c){
     int a;
     int b;
-    b = e.linha;
-    a = e.coluna;
+    b = e->ultima_jogada.linha;
+    a = e->ultima_jogada.coluna;
     CASA casa;
-    casa = tab[a][b];
+    casa = e->tab[a][b];
     return casa;
 }
