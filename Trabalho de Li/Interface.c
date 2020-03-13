@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "Dados.h"
+#define BUF_SIZE 1024
 
 void mostrar_tabuleiro(ESTADO estado);
 
