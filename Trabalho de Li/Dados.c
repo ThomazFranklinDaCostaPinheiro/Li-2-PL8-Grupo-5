@@ -37,3 +37,8 @@ int obter_jogador_atual(ESTADO *estado){
     x = estado.jogador_atual;
     return x;
 }
+
+int obter_numero_de_jogadas(ESTADO *estado);
+    int y;
+    y = estado.num_jogadas;
+    return y;
