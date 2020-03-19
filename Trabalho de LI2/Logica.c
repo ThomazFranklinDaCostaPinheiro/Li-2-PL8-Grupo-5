@@ -2,63 +2,59 @@
 // Created by Thomaz on 12/03/2020.
 //
 
-#include "Logica.h"
-#include "Dados.h"
+#include "Interface.h"
+#include <string.h>
 #include <stdio.h>
-#include <math.h>
+#include "Dados.h"
+#include <string.h>
 
-int e_vizinho (COORDENADA c1, COORDENADA c2){
-    int x1;
-    int x2;
-    int y1;
-    int y2;
-    x1 = c1.coluna;
-    y1 = c1.linha;
-    x2 = c2.coluna;
-    y2 = c2.linha;
-    if (abs(x1-x2)<= 1){
-        if (abs(y1-y2)<= 1)
-            return 1;
-        else
-            return 0;
-    }
+#define BUF_SIZE 1024
+
+int jogar(ESTADO *e, COORDENADA c);
+
+void mostrar_tabuleiro (ESTADO *estado){
+    int il = 0;
+    int ncomandos;
+    int njogador;
+    int jogadatual;
+    ncomandos = estado->num_jogadas;
+    if ((ncomandos % 2) == 1)
+        njogador = 1;
     else
-        return 0;
+        njogador = 2;
+    jogadatual = (estado->num_jogadas/2)+1;
+    while (il < 8){
+        int ic = 0;
+        printf("%d ", (il+1));
+        while (ic < 8){
+            if ((ic == 0) && (il == 7))
+                printf("1 ");
+            else if ((ic == 7) && (il == 0))
+                printf("2");
+            else if (estado->tab[il][ic] == VAZIO)
+                printf(". ");
+            else if (estado->tab[il][ic] == BRANCA)
+                printf("* ");
+            else
+                printf("# ");
+            ic++;
+        }
+        printf("\n");
+        il++;
+    }
+    printf ("  a b c d e f g h \n");
+    printf("(%d,%d)# 0%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
 }
 
-int e_vazio (COORDENADA c3, ESTADO* state){
-    int x3;
-    int y3;
-    x3 = c3.coluna;
-    y3 = c3.linha;
-    if (state->tab[x3][y3]==VAZIO)
-        return 1;
-    else
+int interpretador(ESTADO *e) {
+    char linha[BUF_SIZE];
+    char col[2], lin[2];
+    if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
-}
-
-
-
-int jogar(ESTADO *e, COORDENADA c) {
-    printf("jogar %d %d\n", c.coluna, c.linha);
-    int xu;
-    int yu;
-    xu = e->ultima_jogada.coluna;
-    yu = e->ultima_jogada.linha;
-    int l;
-    int co;
-    l = c.linha;
-    co = c.coluna;
-    if ((e_vazio(c,e))&&(e_vizinho(c,e->ultima_jogada))){
-        e->tab[yu][xu] = PRETA;
-        e->tab[l][co] = BRANCA;
-        e->ultima_jogada.linha = l;
-        e->ultima_jogada.coluna = co;
-        e->num_jogadas= e->num_jogadas+1;
-    }
-    else{
-        printf("Jogada Invalida\n");
-        e->tab[yu][xu] = BRANCA;
+    if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2) {
+        COORDENADA coord = {*col - 'a', *lin - '1'};
+        jogar(e, coord);
+        mostrar_tabuleiro(e);
     }
     return 1;
 }
