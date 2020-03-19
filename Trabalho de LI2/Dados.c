@@ -23,10 +23,11 @@ ESTADO *inicializar_estado() {
     while (i1 < 32) {
         e -> jogadas[i1].jogador1.linha = 4;
         e -> jogadas[i1].jogador1.coluna = 4;
-        e -> jogadas[i1].jogador2.linha = 4;
+        e -> jogadas[i1].jogador2.linha = 4 ;
         e -> jogadas[i1].jogador2.coluna = 4;
         i1++;
     }
+    e -> tab[4][4] = BRANCA;
     e -> jogador_atual = 1;
     e -> num_jogadas = 0;
     return e;
