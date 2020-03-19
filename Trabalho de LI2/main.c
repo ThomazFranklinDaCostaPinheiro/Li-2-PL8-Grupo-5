@@ -6,6 +6,11 @@
 
 int main() {
     ESTADO *e = inicializar_estado();
-    interpretador(e);
+    mostrar_tabuleiro(e);
+    int i = 0;
+    while(i <= 32){
+        interpretador(e);
+        i++;
+    }
     return 0;
 }
