@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
     int x2;
