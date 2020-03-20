@@ -2,7 +2,7 @@
 // Created by Thomaz on 12/03/2020.
 //
 
-#include "Logica.h"
+
 #include "Dados.h"
 #include <stdio.h>
 #include <math.h>
