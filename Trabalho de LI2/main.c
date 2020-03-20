@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "Dados.h"
+#include "Interface.h"
 
 
 int main() {
@@ -8,5 +9,6 @@ int main() {
     while(vencer(e)){
         interpretador(e);
     }
-    printf("\n O vencedor da partida e o Jogador %d", quem_ganha(e));
+    printf("\nO vencedor da partida e o Jogador%d", quem_ganha(e));
     return 0;
+}
