@@ -2,9 +2,11 @@
 // Created by Thomaz on 12/03/2020.
 //
 
-#include "Interface.h"
+#include "Logica.h"
+#include "Dados.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define BUF_SIZE 1024
 
