@@ -5,8 +5,6 @@
 #include "Interface.h"
 #include <string.h>
 #include <stdio.h>
-#include "Dados.h"
-#include <string.h>
 
 #define BUF_SIZE 1024
 
@@ -72,6 +70,5 @@ int interpretador(ESTADO *e) {
         jogar(e, coord);
         mostrar_tabuleiro(e);
     }
-    if()
     return 1;
 }
