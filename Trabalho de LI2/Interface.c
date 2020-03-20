@@ -10,7 +10,26 @@
 
 #define BUF_SIZE 1024
 
-int jogar(ESTADO *e, COORDENADA c);
+
+int quem_ganha(ESTADO *estado){
+    if (estado->tab[0][7])
+        return 1;
+    else if (estado->tab[7][0])
+        return 2;
+    else if (estado->jogador_atual == 1)
+        return 2;
+    else
+        return 1;
+}
+
+int vencer(ESTADO *estado){
+    if (((estado->ultima_jogada.linha == 7)&&(estado->ultima_jogada.coluna) == 0))
+        return 0;
+    else if (((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna) == 7))
+        return 0;
+    else
+        return 1;
+}
 
 void mostrar_tabuleiro (ESTADO *estado){
     int il = 0;
@@ -18,18 +37,15 @@ void mostrar_tabuleiro (ESTADO *estado){
     int njogador;
     int jogadatual;
     ncomandos = estado->num_jogadas;
-    if ((ncomandos % 2) == 1)
-        njogador = 1;
-    else
-        njogador = 2;
-    jogadatual = (estado->num_jogadas/2)+1;
+    njogador = estado->jogador_atual;
+    jogadatual = (estado->num_jogadas/2);
     while (il < 8){
         int ic = 0;
         printf("%d ", (il+1));
         while (ic < 8){
-            if ((ic == 0) && (il == 7))
+            if (estado->tab[il][ic] == UM)
                 printf("1 ");
-            else if ((ic == 7) && (il == 0))
+            else if (estado->tab[il][ic] == DOIS)
                 printf("2");
             else if (estado->tab[il][ic] == VAZIO)
                 printf(". ");
@@ -43,7 +59,7 @@ void mostrar_tabuleiro (ESTADO *estado){
         il++;
     }
     printf ("  a b c d e f g h \n");
-    printf("(%d,%d)# 0%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
+    printf("(%d,%d)#%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
 }
 
 int interpretador(ESTADO *e) {
@@ -56,5 +72,6 @@ int interpretador(ESTADO *e) {
         jogar(e, coord);
         mostrar_tabuleiro(e);
     }
+    if()
     return 1;
 }
