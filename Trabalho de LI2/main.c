@@ -1,16 +1,12 @@
 #include <stdio.h>
 #include "Dados.h"
-#include "Logica.h"
-#include "Interface.h"
 
 
 int main() {
     ESTADO *e = inicializar_estado();
     mostrar_tabuleiro(e);
-    int i = 0;
-    while(i <= 32){
+    while(vencer(e)){
         interpretador(e);
-        i++;
     }
+    printf("\nO vencedor da partida e o Jogador%d", quem_ganha(e));
     return 0;
-}
