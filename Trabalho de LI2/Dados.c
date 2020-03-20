@@ -3,7 +3,6 @@
 //
 
 #include "Dados.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 ESTADO *inicializar_estado() {
@@ -27,6 +26,8 @@ ESTADO *inicializar_estado() {
         e -> jogadas[i1].jogador2.coluna = 4;
         i1++;
     }
+    e -> tab[7][0] = UM;
+    e -> tab[0][7] = DOIS;
     e -> tab[4][4] = BRANCA;
     e -> jogador_atual = 1;
     e -> num_jogadas = 0;
