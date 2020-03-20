@@ -5,8 +5,6 @@
 #ifndef TRABALHO_DE_LI_DADOS_H
 #define TRABALHO_DE_LI_DADOS_H
 
-#include "Logica.h"
-#include "Interface.h"
 
 typedef enum {VAZIO, BRANCA, PRETA, UM, DOIS} CASA;
 typedef struct {
