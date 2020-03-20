@@ -5,4 +5,13 @@
 #ifndef TRABALHO_DE_LI_INTERFACE_H
 #define TRABALHO_DE_LI_INTERFACE_H
 
+#include "Dados.h"
+#include "Logica.h"
+
+int quem_ganha(ESTADO *estado);
+int vencer(ESTADO *estado);
+void mostrar_tabuleiro (ESTADO *estado);
+int interpretador(ESTADO *e);
+
 #endif //TRABALHO_DE_LI_INTERFACE_H
+
