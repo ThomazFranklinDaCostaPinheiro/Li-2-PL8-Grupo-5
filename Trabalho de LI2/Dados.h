@@ -5,7 +5,10 @@
 #ifndef TRABALHO_DE_LI_DADOS_H
 #define TRABALHO_DE_LI_DADOS_H
 
-typedef enum {VAZIO, BRANCA, PRETA} CASA;
+#include "Logica.h"
+#include "Interface.h"
+
+typedef enum {VAZIO, BRANCA, PRETA, UM, DOIS} CASA;
 typedef struct {
     int coluna;
     int linha;
@@ -27,10 +30,5 @@ ESTADO *inicializar_estado();
 int obter_jogador_atual(ESTADO *estado);
 int obter_numero_de_jogadas(ESTADO *estado);
 CASA obter_estado_casa(ESTADO *e, COORDENADA c);
-void mostrar_tabuleiro(ESTADO *estado);
-int interpretador(ESTADO * estado);
-int e_vizinho (COORDENADA c1, COORDENADA c2);
-int e_vazio (COORDENADA c3, ESTADO* state);
-
 
 #endif //TRABALHO_DE_LI_DADOS_H
