@@ -31,13 +31,18 @@ int e_vazio (COORDENADA c3, ESTADO* state){
     int y3;
     x3 = c3.coluna;
     y3 = c3.linha;
-    if (state->tab[x3][y3]==VAZIO)
+    if (state->tab[x3][y3]==VAZIO || state->tab[x3][y3]==UM || state->tab[x3][y3]==DOIS)
         return 1;
     else
         return 0;
 }
 
-
+int e_peca (COORDENADA c){
+    if (((c.coluna >= 0)&&(c.coluna <= 7))&&((c.linha >= 0)&&(c.linha <= 7)))
+        return 1;
+    else
+        return 0;
+}
 
 int jogar(ESTADO *e, COORDENADA c) {
     printf("jogar %d %d\n", c.coluna, c.linha);
@@ -49,12 +54,16 @@ int jogar(ESTADO *e, COORDENADA c) {
     int co;
     l = c.linha;
     co = c.coluna;
-    if ((e_vazio(c,e))&&(e_vizinho(c,e->ultima_jogada))){
+    if ((e_vazio(c,e))&&(e_vizinho(c,e->ultima_jogada))&&(e_peca(c))){
         e->tab[yu][xu] = PRETA;
         e->tab[l][co] = BRANCA;
         e->ultima_jogada.linha = l;
         e->ultima_jogada.coluna = co;
         e->num_jogadas= e->num_jogadas+1;
+        if (e->jogador_atual == 1)
+            e->jogador_atual = 2;
+        else
+            e->jogador_atual = 1;
     }
     else{
         printf("Jogada Invalida\n");
