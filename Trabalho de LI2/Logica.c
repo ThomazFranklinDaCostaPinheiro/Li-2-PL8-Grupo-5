@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <math.h>
 
+//Função que verifica se duas peças são vizinhas.  
 
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
