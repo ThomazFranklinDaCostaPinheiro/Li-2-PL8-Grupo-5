@@ -33,8 +33,8 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
 int e_vazio (COORDENADA c3, ESTADO* state){
     int x3;
     int y3;
-    x3 = c3.coluna;
-    y3 = c3.linha;
+    x3 = c3.coluna-1;
+    y3 = c3.linha-1;
     if (state->tab[x3][y3]==VAZIO || state->tab[x3][y3]==UM || state->tab[x3][y3]==DOIS)
         return 1;
     else
