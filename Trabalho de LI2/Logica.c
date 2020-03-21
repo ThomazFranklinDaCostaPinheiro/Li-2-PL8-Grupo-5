@@ -28,6 +28,8 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
         return 0;
 }
 
+// Essa função verifica se a casa em que se pretende jogar está vazia ou não.
+
 int e_vazio (COORDENADA c3, ESTADO* state){
     int x3;
     int y3;
