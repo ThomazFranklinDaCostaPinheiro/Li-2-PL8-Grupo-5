@@ -1,3 +1,0 @@
-C:/Users/Thomaz/CLionProjects/GUIAO DA AULA 5 (PROJETO)/cmake-build-debug/CMakeFiles/untitled9.dir
-C:/Users/Thomaz/CLionProjects/GUIAO DA AULA 5 (PROJETO)/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Thomaz/CLionProjects/GUIAO DA AULA 5 (PROJETO)/cmake-build-debug/CMakeFiles/rebuild_cache.dir
