@@ -5,7 +5,7 @@
 #ifndef TRABALHO_DE_LI_DADOS_H
 #define TRABALHO_DE_LI_DADOS_H
 
-// Esse tipo CASA é responsável por indicar qual peça está em certa coordenada.
+/** Esse tipo CASA é responsável por indicar qual peça está em certa coordenada.*/
 
 typedef enum {VAZIO, BRANCA, PRETA, UM, DOIS} CASA;
 
