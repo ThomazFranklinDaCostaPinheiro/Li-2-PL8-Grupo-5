@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <math.h>
 
-//Função que verifica se duas peças são vizinhas.  
+//Função que verifica se duas peças são vizinhas.
 
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
@@ -18,12 +18,8 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
     y1 = c1.linha;
     x2 = c2.coluna;
     y2 = c2.linha;
-    if (abs(x1-x2)<= 1){
-        if (abs(y1-y2)<= 1)
-            return 1;
-        else
-            return 0;
-    }
+    if ((abs(x1-x2)<= 1)&&(abs(y1-y2)<= 1))
+        return 1;
     else
         return 0;
 }
@@ -49,7 +45,7 @@ int e_peca (COORDENADA c){
     else
         return 0;
 }
-  
+
 //Função que realiza a jogada.
 
 int jogar(ESTADO *e, COORDENADA c) {
