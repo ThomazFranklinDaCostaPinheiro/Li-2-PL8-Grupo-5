@@ -143,6 +143,8 @@ void mostrar_tabuleiro (ESTADO *estado){
     printf("(%d,%d)#%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
 }
 
+/** Essa função interpreta os comandos do utilizador.*/
+
 int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
