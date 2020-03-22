@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2019.3.3\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\Trabalho_de_Li.dir/objects.a
-C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\ar.exe cr CMakeFiles\Trabalho_de_Li.dir/objects.a @CMakeFiles\Trabalho_de_Li.dir\objects1.rsp
-C:\PROGRA~1\HASKEL~1\86E4AC~1.5\mingw\bin\cc.exe -g   -Wl,--whole-archive CMakeFiles\Trabalho_de_Li.dir/objects.a -Wl,--no-whole-archive  -o Trabalho_de_Li.exe -Wl,--out-implib,libTrabalho_de_Li.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Trabalho_de_Li.dir\linklibs.rsp
