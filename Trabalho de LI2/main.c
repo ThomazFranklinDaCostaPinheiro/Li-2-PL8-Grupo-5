@@ -2,6 +2,7 @@
 #include "Dados.h"
 #include "Interface.h"
 
+/* Esta é a função princpal.*/
 
 int main() {
     ESTADO *e = inicializar_estado();
