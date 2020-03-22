@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 
 #define BUF_SIZE 1024
@@ -76,9 +77,23 @@ int gravar(ESTADO *estado, char filename[]){
         fprintf(fp,"\n");
         il--;
     }
-    fprintf (fp,"  a b c d e f g h \n");
-    fprintf(fp,"(%d,%d)#%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
+    fprintf (fp,"  A B C D E F G H \n");
+    fprintf(fp,"(%d,%d)#%d Player%d (%d)", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
     fclose(fp);
+}
+
+int lerfich(char filename[], ESTADO *estado){
+    FILE *rf;
+    strcat(filename,".txt");
+    if((rf = fopen(filename,"r")) == NULL){
+        printf("Ficheiro nao encontrado>");
+        return 0;
+    }
+    char p;
+    while((p = fgetc(rf)) != EOF)
+        putchar(p);
+    fclose(rf);
+    return 1;
 }
 
 // Essa função determina se um jogador venceu.
@@ -125,11 +140,11 @@ void mostrar_tabuleiro (ESTADO *estado){
     printf("(%d,%d)#%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
 }
 
-// 
-
 int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
+    int in1 = 0;
+    int in2 = 0;
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
     if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2){
@@ -140,7 +155,13 @@ int interpretador(ESTADO *e) {
     char fich[BUF_SIZE];
     if(strcmp(linha, "Q\n") == 0)
         exit(0);
-    if(sscanf(linha,"gr %s",fich) == 2)
-        gravar(e,fich);
+    if(sscanf(linha,"gr %s", fich) == 1){
+        gravar(e, fich);
+        printf("Jogo Gravado\n");
+        mostrar_tabuleiro(e);
+    }
+    if(sscanf(linha,"ler %s", fich) == 1){
+        lerfich(fich,e);
+    }
     return 1;
 }
