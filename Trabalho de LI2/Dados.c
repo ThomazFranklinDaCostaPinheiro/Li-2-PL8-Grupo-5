@@ -41,15 +41,11 @@ int obter_jogador_atual(ESTADO *estado){
     return x;
 }
 
-/**Essa função obtém o número de jogadas realizadas.*/
-
 int obter_numero_de_jogadas(ESTADO *estado){
     int y;
     y = estado->num_jogadas;
     return y;
 }
-
-/** Essa função obtém qual o estado de determinada casa do tabuleiro.*/
 
 CASA obter_estado_casa(ESTADO *e, COORDENADA c){
     int a;
