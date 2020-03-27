@@ -38,6 +38,7 @@ int obter_jogador_atual(ESTADO *estado);
 
 int obter_numero_de_jogadas(ESTADO *estado);
 
+/** Essa função obtém qual o estado de determinada casa do tabuleiro.*/
 
 CASA obter_estado_casa(ESTADO *e, COORDENADA c);
 
