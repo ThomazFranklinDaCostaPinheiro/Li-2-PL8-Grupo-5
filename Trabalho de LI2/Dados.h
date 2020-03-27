@@ -34,6 +34,7 @@ ESTADO *inicializar_estado();
 
 int obter_jogador_atual(ESTADO *estado);
 
+/**Essa função obtém o número de jogadas realizadas.*/
 
 int obter_numero_de_jogadas(ESTADO *estado);
 
