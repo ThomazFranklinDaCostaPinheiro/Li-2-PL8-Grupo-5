@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <math.h>
 
-/**Função que verifica se duas peças são vizinhas.*/
-
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
     int x2;
@@ -24,8 +22,6 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
         return 0;
 }
 
-/** Essa função verifica se a casa em que se pretende jogar está vazia ou não.*/
-
 int e_vazio (COORDENADA c3, ESTADO* state){
     int x3;
     int y3;
@@ -37,16 +33,12 @@ int e_vazio (COORDENADA c3, ESTADO* state){
         return 0;
 }
 
-/** Função que verifica se a coordenada pertence ao tabuleiro.*/
-
 int e_peca (COORDENADA c){
     if (((c.coluna >= 0)&&(c.coluna <= 7))&&((c.linha >= 0)&&(c.linha <= 7)))
         return 1;
     else
         return 0;
 }
-
-/**Função que realiza a jogada.*/
 
 int jogar(ESTADO *e, COORDENADA c) {
     printf("jogar %d %d\n", c.coluna, c.linha);
