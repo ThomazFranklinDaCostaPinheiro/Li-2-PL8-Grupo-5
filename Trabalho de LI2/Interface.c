@@ -13,8 +13,6 @@
 
 #define BUF_SIZE 1024
 
-/** Essa função determina quem foi o vencedor do jogo.*/
-
 int quem_ganha(ESTADO *estado){
     if (estado->tab[7][0])
         return 1;
@@ -25,8 +23,6 @@ int quem_ganha(ESTADO *estado){
     else
         return 1;
 }
-
-/** Essa função indica se um jogador está encurralado, ou seja, sem possibilidades de jogar.*/
 
 int encurralado(ESTADO *estado){
     int x = estado->ultima_jogada.coluna;
@@ -44,8 +40,6 @@ int encurralado(ESTADO *estado){
     }
     return 1;
 }
-
-/** Essa função cria um novo ficheiro onde é gravado o estado do jogo.*/
 
 int gravar(ESTADO *estado, char filename[]){
     FILE *fp;
@@ -82,8 +76,6 @@ int gravar(ESTADO *estado, char filename[]){
     fclose(fp);
 }
 
-/** Essa função basicamente lê o ficheiro.*/
-
 int lerfich(char filename[], ESTADO *estado){
     FILE *rf;
     strcat(filename,".txt");
@@ -98,8 +90,6 @@ int lerfich(char filename[], ESTADO *estado){
     return 1;
 }
 
-/** Essa função determina se um jogador venceu.*/
-
 int vencer(ESTADO *estado){
     if ((estado->ultima_jogada.linha == 7)&&(estado->ultima_jogada.coluna == 0))
         return 0;
@@ -110,7 +100,6 @@ int vencer(ESTADO *estado){
     else
         return 1;
 }
-/* Essa função mostra o tabuleiro atualizado.*/
 
 void mostrar_tabuleiro (ESTADO *estado){
     int il = 7;
@@ -142,8 +131,6 @@ void mostrar_tabuleiro (ESTADO *estado){
     printf ("  a b c d e f g h \n");
     printf("(%d,%d)#%d Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), ncomandos, njogador, jogadatual);
 }
-
-/** Essa função interpreta os comandos do utilizador.*/
 
 int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
