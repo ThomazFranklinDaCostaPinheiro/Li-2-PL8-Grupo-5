@@ -30,6 +30,7 @@ typedef struct {
 
 ESTADO *inicializar_estado();
 
+/**Essa função obtém o jogador que está a jogar.*/
 
 int obter_jogador_atual(ESTADO *estado);
 
