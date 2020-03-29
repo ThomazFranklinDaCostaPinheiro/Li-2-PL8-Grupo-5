@@ -20,4 +20,9 @@ int e_peca (COORDENADA c);
 /**Função que realiza a jogada.*/
 int jogar(ESTADO *e, COORDENADA c);
 
+char conv_c(int col);
+char conv_l(int lin);
+int write_coord(COORDENADA coord);
+int movs(ESTADO *e);
+
 #endif //TRABALHO_DE_LI_LOGICA_H
