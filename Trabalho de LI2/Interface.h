@@ -17,6 +17,9 @@ int encurralado(ESTADO *estado);
 /** Essa função cria um novo ficheiro onde é gravado o estado do jogo.*/
 int gravar(ESTADO *estado, char filename[]);
 
+int armazenar(ESTADO *e,JOGADA jogada, int i);
+COORDENADA conversor(char linha[]);
+
 /** Essa função basicamente lê o ficheiro.*/
 int lerfich(char filename[], ESTADO *estado);
 
