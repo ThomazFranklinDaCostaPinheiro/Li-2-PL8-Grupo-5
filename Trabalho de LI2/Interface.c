@@ -12,7 +12,6 @@
 
 #define BUF_SIZE 1024
 
-// Essa função determina quem foi o vencedor do jogo.
 
 int quem_ganha(ESTADO *estado){
     if (estado->tab[7][0])
@@ -25,7 +24,6 @@ int quem_ganha(ESTADO *estado){
         return 1;
 }
 
-// Essa função indica se um jogador está encurralado, ou seja, sem possibilidades de jogar.
 
 int encurralado(ESTADO *estado){
     int x = estado->ultima_jogada.coluna;
@@ -45,7 +43,6 @@ int encurralado(ESTADO *estado){
 }
 
 
-// Essa função cria um novo ficheiro onde é gravado o estado do jogo.
 
 int gravar(ESTADO *estado, char filename[]){
     FILE *fp;
@@ -157,7 +154,7 @@ int lerfich(char filename[], ESTADO *estado){
             COORDENADA coord1 = conversor(j1);
             COORDENADA coord2 = conversor(j2);
             armazenar(estado, (JOGADA) {coord1, coord2}, i);
-            estado->num_jogadas = njogadas;
+            estado->num_jogadas = njogadas - '0';
             i++;
         }
         else {
@@ -172,7 +169,6 @@ int lerfich(char filename[], ESTADO *estado){
 }
 
 
-// Essa função determina se um jogador venceu.
 
 int vencer(ESTADO *estado){
     if ((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna == 7))
