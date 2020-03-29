@@ -22,7 +22,11 @@ int jogar(ESTADO *e, COORDENADA c);
 
 char conv_c(int col);
 char conv_l(int lin);
+
+/** Essa função basicamente nos dá a coordenada atual.*/
 int write_coord(COORDENADA coord);
+
+/** Essa função nos dá os movimentos realizados até o momento. */
 int movs(ESTADO *e);
 
 #endif //TRABALHO_DE_LI_LOGICA_H
