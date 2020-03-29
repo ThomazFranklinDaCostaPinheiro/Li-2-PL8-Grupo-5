@@ -84,13 +84,13 @@ int gravar(ESTADO *estado, char filename[]){
         yc1 = conv_l(estado->jogadas[i].jogador1.linha);
         xc2 = conv_c(estado->jogadas[i].jogador2.coluna);
         yc2 = conv_l(estado->jogadas[i].jogador2.linha);
-        fprintf(fp,"%c%c %c%c\n",xc1,yc1,xc2,yc2);
+        fprintf(fp,"0%d: %c%c %c%c\n",i+1,xc1,yc1,xc2,yc2);
         i++;
     }
     if (estado->jogador_atual == 2) {
         xc1 = conv_c(estado->jogadas[i].jogador1.coluna);
         yc1 = conv_l(estado->jogadas[i].jogador1.linha);
-        fprintf(fp,"%c%c",xc1,yc1);
+        fprintf(fp,"0%d: %c%c",estado->num_jogadas,xc1,yc1);
     }
     fclose(fp);
     return(0);
@@ -116,16 +116,9 @@ int armazenar(ESTADO *e,JOGADA jogada, int i){
 }
 
 COORDENADA conversor(char linha[]){
-    char col;
-    char lin;
-    int x;
-    int y;
-    COORDENADA coord;
-    sscanf(linha, "%c%c", col, lin);
-    x = col;
-    y = lin;
-    coord.coluna = x;
-    coord.linha = y;
+    char col[2], lin[2];
+    sscanf(linha, "%[a-h]%[1-8]", col, lin);
+    COORDENADA coord = {*col - 'a', *lin - '1'};
     return coord;
 }
 
@@ -157,15 +150,15 @@ int lerfich(char filename[], ESTADO *estado){
     char linha[BUF_SIZE];
     int i = 0;
     while(fgets(linha, BUF_SIZE,rf) != NULL){
+        char njogadas[BUF_SIZE];
         char j1[BUF_SIZE];
         char j2[BUF_SIZE];
-        if (sscanf(linha, "%s %s", j1, j2) == 2){
+        if (sscanf(linha, "0%s: %s %s", njogadas, j1, j2) == 3){
             COORDENADA coord1 = conversor(j1);
             COORDENADA coord2 = conversor(j2);
             armazenar(estado, (JOGADA) {coord1, coord2}, i);
+            estado->num_jogadas = njogadas;
             i++;
-            //printf("%d%d %d%d",coord1.coluna,coord1.linha,coord2.coluna,coord2.linha);
-            //printf("%s\n", j1);
         }
         else {
             COORDENADA coord1 = conversor(j1);
@@ -244,14 +237,6 @@ int interpretador(ESTADO *e) {
     }
     if(strcmp(linha,"movs\n") == 0){
         movs(e);
-    }
-    char debug1;
-    char debug2;
-    if(sscanf(linha,"conv %c%c)",debug1,debug2) == 2){
-        //COORDENADA cord;
-        printf("Olá");
-        //cord = conversor(linha);
-        //printf("%d,%d",cord.coluna, cord.linha);
     }
     return 1;
 }
