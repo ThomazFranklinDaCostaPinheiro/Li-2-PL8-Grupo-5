@@ -29,4 +29,9 @@ int write_coord(COORDENADA coord);
 /** Essa função nos dá os movimentos realizados até o momento. */
 int movs(ESTADO *e);
 
+ESTADO *pos (ESTADO *e, int i);
+ESTADO * reset_tab (ESTADO *e);
+int *desenha_jogada(ESTADO *e, JOGADA jogada);
+ESTADO *pos (ESTADO *e, int i);
+
 #endif //TRABALHO_DE_LI_LOGICA_H
