@@ -32,5 +32,8 @@ void mostrar_tabuleiro (ESTADO *estado);
 /** Essa função interpreta os comandos do utilizador.*/
 int interpretador(ESTADO *e);
 
+int guardar_jogada1(ESTADO* e,int j, char cha, int l);
+int guardar_jogada2(ESTADO* e,int j, char cha, int l);
+
 #endif //TRABALHO_DE_LI_INTERFACE_H
 
