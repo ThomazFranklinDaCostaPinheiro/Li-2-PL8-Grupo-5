@@ -3,11 +3,11 @@
 //
 
 #include "Dados.h"
+#include "Logica.h"
 #include <stdio.h>
 #include <math.h>
 
 
-//Função que verifica se duas peças são vizinhas.
 
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
@@ -24,20 +24,18 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
         return 0;
 }
 
-// Essa função verifica se a casa em que se pretende jogar está vazia ou não.
 
 int e_vazio (COORDENADA c3, ESTADO* state){
     int x3;
     int y3;
-    x3 = c3.coluna-1;
-    y3 = c3.linha-1;
-    if (state->tab[x3][y3]==VAZIO || state->tab[x3][y3]==UM || state->tab[x3][y3]==DOIS)
+    x3 = c3.coluna;
+    y3 = c3.linha;
+    if (state->tab[y3][x3]==VAZIO || state->tab[y3][x3]==UM || state->tab[y3][x3]==DOIS)
         return 1;
     else
         return 0;
 }
 
-// Função que verifica se a coordenada pertence ao tabuleiro.
 
 int e_peca (COORDENADA c){
     if (((c.coluna >= 0)&&(c.coluna <= 7))&&((c.linha >= 0)&&(c.linha <= 7)))
@@ -46,7 +44,6 @@ int e_peca (COORDENADA c){
         return 0;
 }
 
-//Função que realiza a jogada.
 
 int jogar(ESTADO *e, COORDENADA c) {
     printf("jogar %d %d\n", c.coluna, c.linha);
@@ -76,6 +73,15 @@ int jogar(ESTADO *e, COORDENADA c) {
     else{
         printf("Jogada Invalida\n");
         e->tab[yu][xu] = BRANCA;
+    }
+    int nj;
+    nj = e->num_jogadas;
+    while(nj < 32){
+        e->jogadas[nj].jogador1.coluna = 4;
+        e->jogadas[nj].jogador1.linha = 4;
+        e->jogadas[nj].jogador2.coluna = 4;
+        e->jogadas[nj].jogador2.linha = 4;
+        nj++;
     }
     return 1;
 }
@@ -120,4 +126,61 @@ int movs(ESTADO *e){
         write_coord(e->jogadas[i].jogador1);
     }
     return 0;
+}
+
+ESTADO * reset_tab (ESTADO *e){
+    int i2 = 0;
+    while (i2 < 8) {
+        int i3 = 0;
+        while (i3 < 8) {
+            e->tab[i2][i3] = VAZIO;
+            i3++;
+        }
+        i2++;
+    }
+    e -> tab[0][0] = UM;
+    e -> tab[7][7] = DOIS;
+    e -> tab[4][4] = PRETA;
+    return e;
+}
+
+int *desenha_jogada(ESTADO *e, JOGADA jogada){
+    int x1 = jogada.jogador1.coluna;
+    int y1 = jogada.jogador1.linha;
+    e->tab[y1][x1] = PRETA;
+    int x2 = jogada.jogador2.coluna;
+    int y2 = jogada.jogador2.linha;
+    e->tab[y2][x2] = PRETA;
+    return 0;
+}
+
+
+ESTADO *pos (ESTADO *e, int i){
+    int in = 0;
+    JOGADA play;
+    reset_tab(e);
+    int x;
+    int y;
+    while (in < i){
+        play = e->jogadas[in];
+        desenha_jogada(e,play);
+        in++;
+    }
+    if(e->jogadas[in-1].jogador2.linha == 9){
+        y = e->jogadas[in-1].jogador1.linha;
+        x = e->jogadas[in-1].jogador1.coluna;
+        e->tab[y][x] = BRANCA;
+        e->ultima_jogada.coluna = x;
+        e->ultima_jogada.linha = y;
+        e->num_jogadas = i;
+    }
+    else{
+        y = e->jogadas[in-1].jogador2.linha;
+        x = e->jogadas[in-1].jogador2.coluna;
+        e->tab[y][x] = BRANCA;
+        e->ultima_jogada.coluna = x;
+        e->ultima_jogada.linha = y;
+        e->num_jogadas = i + 1;
+    }
+
 }
