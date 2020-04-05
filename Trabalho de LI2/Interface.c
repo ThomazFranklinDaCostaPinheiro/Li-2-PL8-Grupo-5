@@ -106,18 +106,6 @@ CASA qualcasa (char c){
         return VAZIO;
 }
 
-int armazenar(ESTADO *e,JOGADA jogada, int i){
-    e->jogadas[i].jogador1 = jogada.jogador1;
-    if ((e->jogadas[i].jogador2.coluna != 9)&&(e->jogadas[i].jogador2.linha != 9))
-        e->jogadas[i].jogador2 = jogada.jogador2;
-}
-
-COORDENADA conversor(char linha[]){
-    char col[2], lin[2];
-    sscanf(linha, "%[a-h]%[1-8]", col, lin);
-    COORDENADA coord = {*col - 'a', *lin - '1'};
-    return coord;
-}
 
 int lerfich(char filename[], ESTADO *estado){
     int nl = 7;
@@ -146,28 +134,38 @@ int lerfich(char filename[], ESTADO *estado){
     fseek(rf,3,SEEK_CUR);
     char linha[BUF_SIZE];
     int i = 0;
-    while(fgets(linha, BUF_SIZE,rf) != NULL){
-        char njogadas[BUF_SIZE];
-        char j1[BUF_SIZE];
-        char j2[BUF_SIZE];
-        if (sscanf(linha, "0%s: %s %s", njogadas, j1, j2) == 3){
-            COORDENADA coord1 = conversor(j1);
-            COORDENADA coord2 = conversor(j2);
-            armazenar(estado, (JOGADA) {coord1, coord2}, i);
-            estado->num_jogadas = njogadas - '0';
-            i++;
-        }
-        else {
-            COORDENADA coord1 = conversor(j1);
-            COORDENADA coord2 = {9,9};
-            armazenar(estado, (JOGADA) {coord1, coord2}, i);
-        }
+    int j1;
+    int j2;
+    int j;
+    char ch1 = 'z';
+    char ch2 ='z';
+    int l1 = 9;
+    int l2 = 9;
+    while(fscanf(rf,"%d%d: %c%d %c%d ",j1,j2,ch1,l1,ch2,l2) != EOF){
+        j = j1 * 10 + j2;
+        guardar_jogada1(estado, j, ch1, l1);
+        guardar_jogada2(estado, j, ch2, l2);
     }
     fclose(rf);
     mostrar_tabuleiro(estado);
     return 1;
 }
 
+int guardar_jogada1(ESTADO* e,int j, char cha, int l){
+    int c;
+    c = conv_c(cha);
+    e->jogadas[j].jogador1.coluna = c;
+    e->jogadas[j].jogador1.linha = l;
+    return 0;
+}
+
+int guardar_jogada2(ESTADO* e,int j, char cha, int l){
+    int c;
+    c = conv_c(cha);
+    e->jogadas[j].jogador2.coluna = c;
+    e->jogadas[j].jogador2.linha = l;
+    return 0;
+}
 
 
 int vencer(ESTADO *estado){
@@ -207,7 +205,7 @@ void mostrar_tabuleiro (ESTADO *estado){
         il--;
     }
     printf ("  a b c d e f g h \n");
-    printf("(%d,%d) Player%d (%d)>", (estado->ultima_jogada.coluna+1), (estado->ultima_jogada.linha+1), njogador, jogadatual);
+    printf("(%d,%d) Player%d (%d)>", (estado->ultima_jogada.coluna), (estado->ultima_jogada.linha), njogador, jogadatual);
 }
 
 int interpretador(ESTADO *e) {
@@ -233,6 +231,13 @@ int interpretador(ESTADO *e) {
     }
     if(strcmp(linha,"movs\n") == 0){
         movs(e);
+    }
+    char num[2];
+    int n;
+    if(sscanf(linha,"pos %s", num) == 1){
+        n = atoi(num);
+        pos(e,n);
+        mostrar_tabuleiro(e);
     }
     return 1;
 }
