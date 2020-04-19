@@ -239,5 +239,9 @@ int interpretador(ESTADO *e) {
         pos(e,n);
         mostrar_tabuleiro(e);
     }
+    if(strcmp(linha,"jog\n") == 0){
+        jogs(e);
+        mostrar_tabuleiro(e);
+    }
     return 1;
 }
