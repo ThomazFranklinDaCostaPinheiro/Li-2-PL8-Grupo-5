@@ -32,6 +32,9 @@ int movs(ESTADO *e);
 ESTADO *pos (ESTADO *e, int i);
 ESTADO * reset_tab (ESTADO *e);
 int *desenha_jogada(ESTADO *e, JOGADA jogada);
-ESTADO *pos (ESTADO *e, int i);
+COORDENADA *offset(COORDENADA c, int x, int y);
+LISTA casas_disp(ESTADO *e);
+COORDENADA rand_coord(LISTA l);
+int jogs(ESTADO *e);
 
 #endif //TRABALHO_DE_LI_LOGICA_H
