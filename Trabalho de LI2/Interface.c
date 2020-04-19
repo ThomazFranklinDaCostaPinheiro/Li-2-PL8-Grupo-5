@@ -165,10 +165,6 @@ int guardar_jogada2(ESTADO* e,int j, char cha, int l){
     return 0;
 }
 
-int setjogada(){
-
-}
-
 
 int vencer(ESTADO *estado){
     if ((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna == 0))
