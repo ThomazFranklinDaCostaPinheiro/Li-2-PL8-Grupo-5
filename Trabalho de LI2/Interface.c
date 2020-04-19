@@ -76,6 +76,7 @@ int gravar(ESTADO *estado, char filename[]){
     char yc1;
     char xc2;
     char yc2;
+    fprintf_s(fp,"\n");
     while (i < (estado->num_jogadas-1)){
         xc1 = conv_c(estado->jogadas[i].jogador1.coluna);
         yc1 = conv_l(estado->jogadas[i].jogador1.linha);
@@ -134,15 +135,12 @@ int lerfich(char filename[], ESTADO *estado){
     fseek(rf,3,SEEK_CUR);
     char linha[BUF_SIZE];
     int i = 0;
-    int j1;
-    int j2;
     int j;
     char ch1 = 'z';
     char ch2 ='z';
     int l1 = 9;
     int l2 = 9;
-    while(fscanf(rf,"%d%d: %c%d %c%d ",j1,j2,ch1,l1,ch2,l2) != EOF){
-        j = j1 * 10 + j2;
+    while(fscanf(rf,"%2d: %c%d %c%d \n",j,ch1,l1,ch2,l2) != EOF){
         guardar_jogada1(estado, j, ch1, l1);
         guardar_jogada2(estado, j, ch2, l2);
     }
@@ -167,11 +165,15 @@ int guardar_jogada2(ESTADO* e,int j, char cha, int l){
     return 0;
 }
 
+int setjogada(){
+
+}
+
 
 int vencer(ESTADO *estado){
-    if ((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna == 7))
+    if ((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna == 0))
         return 0;
-    else if ((estado->ultima_jogada.linha == 7)&&(estado->ultima_jogada.coluna == 0))
+    else if ((estado->ultima_jogada.linha == 7)&&(estado->ultima_jogada.coluna == 7))
         return 0;
     else if (encurralado(estado))
         return 0;
