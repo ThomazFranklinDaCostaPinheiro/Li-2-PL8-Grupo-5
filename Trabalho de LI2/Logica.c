@@ -182,5 +182,59 @@ ESTADO *pos (ESTADO *e, int i){
         e->ultima_jogada.linha = y;
         e->num_jogadas = i + 1;
     }
+}
 
+COORDENADA *offset(COORDENADA c, int x, int y){
+    COORDENADA *r;
+    r->linha = c.linha + y;
+    r->coluna = c.coluna + x;
+    return r;
+}
+
+LISTA casas_disp(ESTADO *e){
+    COORDENADA c;
+    c = e->ultima_jogada;
+    LISTA l = criar_lista();
+    COORDENADA *c1 = offset(c,0,1);
+    COORDENADA *c2 = offset(c,0,(-1));
+    COORDENADA *c3 = offset(c,1,0);
+    COORDENADA *c4 = offset(c,(-1),0);
+    COORDENADA *c5 = offset(c,1,1);
+    COORDENADA *c6 = offset(c,(-1),1);
+    COORDENADA *c7 = offset(c,1,(-1));
+    COORDENADA *c8 = offset(c,(-1),(-1));
+    if (e_peca(*c1))
+        l = insere_cabeca(l,c1);
+    if (e_peca(*c2))
+        l = insere_cabeca(l,c2);
+    if (e_peca(*c3))
+        l = insere_cabeca(l,c3);
+    if (e_peca(*c4))
+        l = insere_cabeca(l,c4);
+    if (e_peca(*c5))
+        l = insere_cabeca(l,c5);
+    if (e_peca(*c6))
+        l = insere_cabeca(l,c6);
+    if (e_peca(*c7))
+        l = insere_cabeca(l,c7);
+    if (e_peca(*c8))
+        l = insere_cabeca(l,c8);
+    return l;
+}
+
+COORDENADA rand_coord(LISTA l){
+    srand((unsigned)time(NULL));
+    int n;
+    n = (rand() %7);
+    while (n > 0){
+        l = remove_cabeca(l);
+        n--;
+    }
+    COORDENADA *c = (COORDENADA *) devolve_cabeca(l);
+    return *c;
+}
+
+int jogs(ESTADO *e){
+    jogar(e,rand_coord(casas_disp(e)));
+    return 0;
 }
