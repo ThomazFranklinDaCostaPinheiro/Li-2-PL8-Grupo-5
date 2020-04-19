@@ -5,7 +5,10 @@
 #include "Dados.h"
 #include "Logica.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <time.h>
+#include "Listas.h"
 
 
 
@@ -161,26 +164,36 @@ ESTADO *pos (ESTADO *e, int i){
     reset_tab(e);
     int x;
     int y;
-    while (in < i){
-        play = e->jogadas[in];
-        desenha_jogada(e,play);
-        in++;
-    }
-    if(e->jogadas[in-1].jogador2.linha == 9){
-        y = e->jogadas[in-1].jogador1.linha;
-        x = e->jogadas[in-1].jogador1.coluna;
-        e->tab[y][x] = BRANCA;
-        e->ultima_jogada.coluna = x;
-        e->ultima_jogada.linha = y;
-        e->num_jogadas = i;
+    int a;
+    int b;
+    if (i == 0){
+        reset_tab(e);
+        e->tab[4][4] = BRANCA;
+        e->ultima_jogada.linha = 4;
+        e->ultima_jogada.coluna = 4;
     }
     else{
-        y = e->jogadas[in-1].jogador2.linha;
-        x = e->jogadas[in-1].jogador2.coluna;
-        e->tab[y][x] = BRANCA;
-        e->ultima_jogada.coluna = x;
-        e->ultima_jogada.linha = y;
-        e->num_jogadas = i + 1;
+        while (in < i){
+            play = e->jogadas[in];
+            desenha_jogada(e,play);
+            in++;
+        }
+        if(e->jogadas[in-1].jogador2.linha == 9){
+            y = e->jogadas[in-1].jogador1.linha;
+            x = e->jogadas[in-1].jogador1.coluna;
+            e->tab[y][x] = BRANCA;
+            e->ultima_jogada.coluna = x;
+            e->ultima_jogada.linha = y;
+            e->num_jogadas = i;
+        }
+        else{
+            y = e->jogadas[in-1].jogador2.linha;
+            x = e->jogadas[in-1].jogador2.coluna;
+            e->tab[y][x] = BRANCA;
+            e->ultima_jogada.coluna = x;
+            e->ultima_jogada.linha = y;
+            e->num_jogadas = i + 1;
+        }
     }
 }
 
@@ -195,29 +208,37 @@ LISTA casas_disp(ESTADO *e){
     COORDENADA c;
     c = e->ultima_jogada;
     LISTA l = criar_lista();
-    COORDENADA *c1 = offset(c,0,1);
-    COORDENADA *c2 = offset(c,0,(-1));
-    COORDENADA *c3 = offset(c,1,0);
-    COORDENADA *c4 = offset(c,(-1),0);
-    COORDENADA *c5 = offset(c,1,1);
-    COORDENADA *c6 = offset(c,(-1),1);
-    COORDENADA *c7 = offset(c,1,(-1));
-    COORDENADA *c8 = offset(c,(-1),(-1));
-    if (e_peca(*c1))
+    COORDENADA *c1 = malloc(sizeof(COORDENADA));
+    COORDENADA *c2 = malloc(sizeof(COORDENADA));
+    COORDENADA *c3 = malloc(sizeof(COORDENADA));
+    COORDENADA *c4 = malloc(sizeof(COORDENADA));
+    COORDENADA *c5 = malloc(sizeof(COORDENADA));
+    COORDENADA *c6 = malloc(sizeof(COORDENADA));
+    COORDENADA *c7 = malloc(sizeof(COORDENADA));
+    COORDENADA *c8 = malloc(sizeof(COORDENADA));
+    c1 = offset(c,0,1);
+    c2 = offset(c,0,(-1));
+    c3 = offset(c,1,0);
+    c4 = offset(c,(-1),0);
+    c5 = offset(c,1,1);
+    c6 = offset(c,(-1),1);
+    c7 = offset(c,1,(-1));
+    c8 = offset(c,(-1),(-1));
+    if (e_peca(*c1)&&(e_vazio(*c1,e)))
         l = insere_cabeca(l,c1);
-    if (e_peca(*c2))
+    if (e_peca(*c2)&&(e_vazio(*c2,e)))
         l = insere_cabeca(l,c2);
-    if (e_peca(*c3))
+    if (e_peca(*c3)&&(e_vazio(*c3,e)))
         l = insere_cabeca(l,c3);
-    if (e_peca(*c4))
+    if (e_peca(*c4)&&(e_vazio(*c4,e)))
         l = insere_cabeca(l,c4);
-    if (e_peca(*c5))
+    if (e_peca(*c5)&&(e_vazio(*c5,e)))
         l = insere_cabeca(l,c5);
-    if (e_peca(*c6))
+    if (e_peca(*c6)&&(e_vazio(*c6,e)))
         l = insere_cabeca(l,c6);
-    if (e_peca(*c7))
+    if (e_peca(*c7)&&(e_vazio(*c7,e)))
         l = insere_cabeca(l,c7);
-    if (e_peca(*c8))
+    if (e_peca(*c8)&&(e_vazio(*c8,e)))
         l = insere_cabeca(l,c8);
     return l;
 }
@@ -226,12 +247,16 @@ COORDENADA rand_coord(LISTA l){
     srand((unsigned)time(NULL));
     int n;
     n = (rand() %7);
-    while (n > 0){
+    printf("%d\n",n);
+    while ((l->proximo) && (n > 0)){
+        printf("%d Eureka\n", n);
         l = remove_cabeca(l);
         n--;
     }
-    COORDENADA *c = (COORDENADA *) devolve_cabeca(l);
-    return *c;
+    COORDENADA c = *(COORDENADA *) devolve_cabeca(l);
+    while (lista_esta_vazia(l))
+        l = remove_cabeca(l);
+    return c;
 }
 
 int jogs(ESTADO *e){
