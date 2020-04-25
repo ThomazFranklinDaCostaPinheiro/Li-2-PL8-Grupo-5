@@ -10,7 +10,34 @@
 #include <time.h>
 #include "Listas.h"
 
+int quem_ganha(ESTADO *estado){
+    if ((obter_linha_ult(estado) == 0)&&(obter_coluna_ult(estado) == 0))
+        return 1;
+    else if ((obter_linha_ult(estado) == 7)&&(obter_coluna_ult(estado) == 7))
+        return 2;
+    else if (obter_jogador_atual(estado) == 1)
+        return 2;
+    else
+        return 1;
+}
 
+
+int encurralado(ESTADO *estado){
+    int x = obter_coluna_ult(estado);
+    int y = obter_linha_ult(estado);
+    int i1 = y-1;
+    int i2;
+    while (i1 <= y+1){
+        i2 = x-1;
+        while (i2 <= x + 1){
+            if (obter_casa(estado, i1, i2) == VAZIO)
+                return 0;
+            i2++;
+        }
+        i1++;
+    }
+    return 1;
+}
 
 int e_vizinho (COORDENADA c1, COORDENADA c2){
     int x1;
@@ -33,7 +60,7 @@ int e_vazio (COORDENADA c3, ESTADO* state){
     int y3;
     x3 = c3.coluna;
     y3 = c3.linha;
-    if (state->tab[y3][x3]==VAZIO || state->tab[y3][x3]==UM || state->tab[y3][x3]==DOIS)
+    if (obter_casa(state, y3, x3)==VAZIO || obter_casa(state, y3, x3)==UM || obter_casa(state, y3, x3)==DOIS)
         return 1;
     else
         return 0;
@@ -52,16 +79,16 @@ int jogar(ESTADO *e, COORDENADA c) {
     printf("jogar %d %d\n", c.coluna, c.linha);
     int xu;
     int yu;
-    xu = e->ultima_jogada.coluna;
-    yu = e->ultima_jogada.linha;
+    xu = obter_coluna_ult(e);
+    yu = obter_linha_ult(e);
     int l;
     int co;
     l = c.linha;
     co = c.coluna;
-    if ((e_vazio(c,e))&&(e_vizinho(c,e->ultima_jogada))&&(e_peca(c))) {
+    if ((e_vazio(c,e))&&(e_vizinho(c,obter_ult_jog(e)))&&(e_peca(c))) {
         e->tab[yu][xu] = PRETA;
         e->tab[l][co] = BRANCA;
-        if (e->jogador_atual == 1) {
+        if (obter_jogador_atual(e) == 1){
             e->jogadas[e->num_jogadas-1].jogador1 = c;
             e->jogador_atual = 2;
         }
@@ -89,18 +116,16 @@ int jogar(ESTADO *e, COORDENADA c) {
     return 1;
 }
 
-char conv_c(int col){
-    char c;
-    c = 'a' + col;
-    return c;
+int vencer(ESTADO *estado){
+    if ((obter_linha_ult(estado) == 0)&&(obter_coluna_ult(estado) == 0))
+        return 0;
+    else if ((obter_linha_ult(estado) == 7)&&(obter_coluna_ult(estado) == 7))
+        return 0;
+    else if (encurralado(estado))
+        return 0;
+    else
+        return 1;
 }
-
-char conv_l(int lin){
-    char c;
-    c = '1' + lin;
-    return c;
-}
-
 
 int write_coord(COORDENADA coord){
     int x;
@@ -117,16 +142,16 @@ int write_coord(COORDENADA coord){
 
 int movs(ESTADO *e){
     int i = 0;
-    while (i < (e->num_jogadas-1)){
+    while (i < (obter_numero_de_jogadas(e)-1)){
         printf("j%d: ",(i+1));
-        write_coord(e->jogadas[i].jogador1);
-        write_coord(e->jogadas[i].jogador2);
+        write_coord(obter_jog(e,1,i));
+        write_coord(obter_jog(e,2,i));
         printf("\n");
         i++;
     }
-    if (e->jogador_atual == 2) {
+    if (obter_jogador_atual(e) == 2) {
         printf("j%d: ",i+1);
-        write_coord(e->jogadas[i].jogador1);
+        write_coord(obter_jog(e,1,i));
     }
     return 0;
 }
@@ -174,21 +199,21 @@ ESTADO *pos (ESTADO *e, int i){
     }
     else{
         while (in < i){
-            play = e->jogadas[in];
+            play = obter_jogadas(e, in);
             desenha_jogada(e,play);
             in++;
         }
-        if(e->jogadas[in-1].jogador2.linha == 9){
-            y = e->jogadas[in-1].jogador1.linha;
-            x = e->jogadas[in-1].jogador1.coluna;
+        if(obter_linha(e,2,in-1) == 9){
+            y = obter_linha(e,1,in-1);
+            x = obter_coluna(e,1,in-1);
             e->tab[y][x] = BRANCA;
             e->ultima_jogada.coluna = x;
             e->ultima_jogada.linha = y;
             e->num_jogadas = i;
         }
         else{
-            y = e->jogadas[in-1].jogador2.linha;
-            x = e->jogadas[in-1].jogador2.coluna;
+            y = obter_linha(e,2,in-1);
+            x = obter_coluna(e,2,in-1);
             e->tab[y][x] = BRANCA;
             e->ultima_jogada.coluna = x;
             e->ultima_jogada.linha = y;
@@ -206,24 +231,16 @@ COORDENADA *offset(COORDENADA c, int x, int y){
 
 LISTA casas_disp(ESTADO *e){
     COORDENADA c;
-    c = e->ultima_jogada;
+    c = obter_ult_jog(e);
     LISTA l = criar_lista();
-    COORDENADA *c1;
-    COORDENADA *c2;
-    COORDENADA *c3;
-    COORDENADA *c4;
-    COORDENADA *c5;
-    COORDENADA *c6;
-    COORDENADA *c7;
-    COORDENADA *c8;
-    c1 = offset(c,0,1);
-    c2 = offset(c,0,(-1));
-    c3 = offset(c,1,0);
-    c4 = offset(c,(-1),0);
-    c5 = offset(c,1,1);
-    c6 = offset(c,(-1),1);
-    c7 = offset(c,1,(-1));
-    c8 = offset(c,(-1),(-1));
+    COORDENADA *c1 = offset(c,0,1);
+    COORDENADA *c2 = offset(c,0,(-1));
+    COORDENADA *c3 = offset(c,1,0);
+    COORDENADA *c4 = offset(c,(-1),0);
+    COORDENADA *c5 = offset(c,1,1);
+    COORDENADA *c6 = offset(c,(-1),1);
+    COORDENADA *c7 = offset(c,1,(-1));
+    COORDENADA *c8 = offset(c,(-1),(-1));
     if (e_peca(*c1)&&(e_vazio(*c1,e)))
         l = insere_cabeca(l,c1);
     if (e_peca(*c2)&&(e_vazio(*c2,e)))
@@ -248,7 +265,7 @@ COORDENADA rand_coord(LISTA l){
     int n;
     n = (rand() %7);
     printf("%d\n",n);
-    while ((l->proximo) && (n > 0)){
+    while ((proximo(l)) && (n > 0)){
         printf("%d Eureka\n", n);
         l = remove_cabeca(l);
         n--;
