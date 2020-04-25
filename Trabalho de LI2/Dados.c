@@ -35,6 +35,17 @@ ESTADO *inicializar_estado() {
     return e;
 }
 
+char conv_c(int col){
+    char c;
+    c = 'a' + col;
+    return c;
+}
+
+char conv_l(int lin){
+    char c;
+    c = '1' + lin;
+    return c;
+}
 
 int obter_jogador_atual(ESTADO *estado){
     int x;
@@ -42,13 +53,11 @@ int obter_jogador_atual(ESTADO *estado){
     return x;
 }
 
-
 int obter_numero_de_jogadas(ESTADO *estado){
     int y;
     y = estado->num_jogadas;
     return y;
 }
-
 
 CASA obter_estado_casa(ESTADO *e, COORDENADA c){
     int a;
@@ -58,4 +67,60 @@ CASA obter_estado_casa(ESTADO *e, COORDENADA c){
     CASA casa;
     casa = e->tab[a][b];
     return casa;
+}
+
+CASA obter_casa(ESTADO *e, int y, int x){
+    return e->tab[y][x];
+}
+
+int obter_coluna(ESTADO *e, int player, int jogada){
+    if (player == 2)
+        return e->jogadas[jogada].jogador2.coluna;
+    else
+        return e->jogadas[jogada].jogador1.coluna;
+}
+
+int obter_linha(ESTADO *e, int player, int jogada){
+    if (player == 2)
+        return e->jogadas[jogada].jogador2.linha;
+    else
+        return e->jogadas[jogada].jogador1.linha;
+}
+
+int obter_coluna_ult(ESTADO *e){
+    return e->ultima_jogada.coluna;
+}
+int obter_linha_ult(ESTADO *e){
+    return e->ultima_jogada.linha;
+}
+
+COORDENADA obter_ult_jog(ESTADO *e){
+    return e->ultima_jogada;
+}
+
+COORDENADA obter_jog(ESTADO *e, int player, int jogada){
+    if (player == 2)
+        return  e->jogadas[jogada].jogador2;
+    else
+        return  e->jogadas[jogada].jogador1;
+}
+
+JOGADA obter_jogadas(ESTADO *e,int n){
+    return e->jogadas[n];
+}
+
+int guardar_jogada1(ESTADO* e,int j, char cha, int l){
+    int c;
+    c = conv_c(cha);
+    e->jogadas[j].jogador1.coluna = c;
+    e->jogadas[j].jogador1.linha = l;
+    return 0;
+}
+
+int guardar_jogada2(ESTADO* e,int j, char cha, int l){
+    int c;
+    c = conv_c(cha);
+    e->jogadas[j].jogador2.coluna = c;
+    e->jogadas[j].jogador2.linha = l;
+    return 0;
 }
