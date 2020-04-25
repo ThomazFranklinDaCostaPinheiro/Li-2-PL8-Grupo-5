@@ -8,41 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 #define BUF_SIZE 1024
-
-
-int quem_ganha(ESTADO *estado){
-    if (estado->tab[7][0])
-        return 1;
-    else if (estado->tab[0][7])
-        return 2;
-    else if (estado->jogador_atual == 1)
-        return 2;
-    else
-        return 1;
-}
-
-
-int encurralado(ESTADO *estado){
-    int x = estado->ultima_jogada.coluna;
-    int y = estado->ultima_jogada.linha;
-    int i1 = y-1;
-    int i2;
-    while (i1 <= y+1){
-        i2 = x-1;
-        while (i2 <= x + 1){
-            if (estado->tab[i1][i2] == VAZIO)
-                return 0;
-            i2++;
-        }
-        i1++;
-    }
-    return 1;
-}
-
-
 
 int gravar(ESTADO *estado, char filename[]){
     FILE *fp;
@@ -51,18 +17,18 @@ int gravar(ESTADO *estado, char filename[]){
     int il = 7;
     int njogador;
     int jogadatual;
-    njogador = estado->jogador_atual;
-    jogadatual = estado->num_jogadas;
+    njogador = obter_jogador_atual(estado);
+    jogadatual = obter_numero_de_jogadas(estado);
     while (il >= 0){
         int ic = 0;
         while (ic < 8){
-            if (estado->tab[il][ic] == UM)
+            if (obter_casa(estado,il,ic) == UM)
                 fprintf(fp,"1 ");
-            else if (estado->tab[il][ic] == DOIS)
+            else if (obter_casa(estado,il,ic) == DOIS)
                 fprintf(fp,"2");
-            else if (estado->tab[il][ic] == VAZIO)
+            else if (obter_casa(estado,il,ic) == VAZIO)
                 fprintf(fp,". ");
-            else if (estado->tab[il][ic] == BRANCA)
+            else if (obter_casa(estado,il,ic) == BRANCA)
                 fprintf(fp,"* ");
             else
                 fprintf(fp,"# ");
@@ -77,18 +43,18 @@ int gravar(ESTADO *estado, char filename[]){
     char xc2;
     char yc2;
     fprintf_s(fp,"\n");
-    while (i < (estado->num_jogadas-1)){
-        xc1 = conv_c(estado->jogadas[i].jogador1.coluna);
-        yc1 = conv_l(estado->jogadas[i].jogador1.linha);
-        xc2 = conv_c(estado->jogadas[i].jogador2.coluna);
-        yc2 = conv_l(estado->jogadas[i].jogador2.linha);
+    while (i < (obter_numero_de_jogadas(estado)-1)){
+        xc1 = conv_c(obter_coluna(estado,2,i));
+        yc1 = conv_l(obter_coluna(estado,1,i));
+        xc2 = conv_c(obter_linha(estado,2,i));
+        yc2 = conv_l(obter_linha(estado,1,i));
         fprintf(fp,"0%d: %c%c %c%c\n",i+1,xc1,yc1,xc2,yc2);
         i++;
     }
-    if (estado->jogador_atual == 2) {
-        xc1 = conv_c(estado->jogadas[i].jogador1.coluna);
-        yc1 = conv_l(estado->jogadas[i].jogador1.linha);
-        fprintf(fp,"0%d: %c%c",estado->num_jogadas,xc1,yc1);
+    if (obter_jogador_atual(estado) == 2) {
+        xc1 = conv_c(obter_coluna(estado,1,i));
+        yc1 = conv_l(obter_linha(estado,1,i));
+        fprintf(fp,"0%d: %c%c",obter_numero_de_jogadas(estado),xc1,yc1);
     }
     fclose(fp);
     return(0);
@@ -106,7 +72,6 @@ CASA qualcasa (char c){
     else
         return VAZIO;
 }
-
 
 int lerfich(char filename[], ESTADO *estado){
     int nl = 7;
@@ -149,51 +114,23 @@ int lerfich(char filename[], ESTADO *estado){
     return 1;
 }
 
-int guardar_jogada1(ESTADO* e,int j, char cha, int l){
-    int c;
-    c = conv_c(cha);
-    e->jogadas[j].jogador1.coluna = c;
-    e->jogadas[j].jogador1.linha = l;
-    return 0;
-}
-
-int guardar_jogada2(ESTADO* e,int j, char cha, int l){
-    int c;
-    c = conv_c(cha);
-    e->jogadas[j].jogador2.coluna = c;
-    e->jogadas[j].jogador2.linha = l;
-    return 0;
-}
-
-
-int vencer(ESTADO *estado){
-    if ((estado->ultima_jogada.linha == 0)&&(estado->ultima_jogada.coluna == 0))
-        return 0;
-    else if ((estado->ultima_jogada.linha == 7)&&(estado->ultima_jogada.coluna == 7))
-        return 0;
-    else if (encurralado(estado))
-        return 0;
-    else
-        return 1;
-}
-
 void mostrar_tabuleiro (ESTADO *estado){
     int il = 7;
     int njogador;
     int jogadatual;
-    njogador = estado->jogador_atual;
-    jogadatual = estado->num_jogadas;
+    njogador = obter_jogador_atual(estado);
+    jogadatual = obter_numero_de_jogadas(estado);
     while (il >= 0){
         int ic = 0;
         printf("%d ",(il+1));
         while (ic < 8){
-            if (estado->tab[il][ic] == UM)
+            if (obter_casa(estado, il, ic) == UM)
                 printf("1 ");
-            else if (estado->tab[il][ic] == DOIS)
+            else if (obter_casa(estado, il, ic) == DOIS)
                 printf("2");
-            else if (estado->tab[il][ic] == VAZIO)
+            else if (obter_casa(estado, il, ic) == VAZIO)
                 printf(". ");
-            else if (estado->tab[il][ic] == BRANCA)
+            else if (obter_casa(estado, il, ic) == BRANCA)
                 printf("* ");
             else
                 printf("# ");
@@ -203,7 +140,7 @@ void mostrar_tabuleiro (ESTADO *estado){
         il--;
     }
     printf ("  a b c d e f g h \n");
-    printf("(%d,%d) Player%d (%d)>", (estado->ultima_jogada.coluna), (estado->ultima_jogada.linha), njogador, jogadatual);
+    printf("(%d,%d) Player%d (%d)>", (obter_coluna_ult(estado)), (obter_linha_ult(estado)), njogador, jogadatual);
 }
 
 int interpretador(ESTADO *e) {
