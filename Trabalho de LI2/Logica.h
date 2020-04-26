@@ -33,13 +33,17 @@ ESTADO *pos (ESTADO *e, int i);
 ESTADO * reset_tab (ESTADO *e);
 /** Desenha no tabuleiro uma sequência dois movimentos */
 int *desenha_jogada(ESTADO *e, JOGADA jogada);
-/** Função que devolve uma coordenada a que foi adicionad os valores x e y */
-COORDENADA *offset(COORDENADA c, int x, int y);
 /** Cria uma lista das casas disponiveis em torno da peça branca */
 LISTA casas_disp(ESTADO *e);
 /** Devolve uma coordenada aleatória */
 COORDENADA rand_coord(LISTA l);
-/** Realiza uma jogada segundo um algoritmo */
+/** Realiza uma jogada segundo um algoritmo aleatório*/
 int jogs(ESTADO *e);
+/** Devolve uma coordenada segundo a heuristica da distancia euclidiana. */
+COORDENADA euclidiana(LISTA l, int player);
+/** Calcula a distancia entre dois pontos. */
+double distancia(COORDENADA c1, COORDENADA c2);
+/** Realiza uma jogada segundo um algoritmo de distância euclidiana. */
+int jogs2(ESTADO *e);
 
 #endif //TRABALHO_DE_LI_LOGICA_H
