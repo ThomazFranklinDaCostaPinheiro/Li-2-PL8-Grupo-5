@@ -331,7 +331,6 @@ COORDENADA euclidiana(LISTA l, int player){
                 c = cabeca;
             }
         }
-        printf("putas\n");
         l = proximo(l);
     }
     return c;
