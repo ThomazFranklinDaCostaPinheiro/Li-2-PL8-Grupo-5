@@ -178,5 +178,17 @@ int interpretador(ESTADO *e) {
         jogs(e);
         mostrar_tabuleiro(e);
     }
+    if(strcmp(linha,"jog2\n") == 0){
+        jogs2(e);
+        /**COORDENADA c;
+        c.coluna = euclidiana(e,obter_jogador_atual(e)).coluna;
+        c.linha = euclidiana(e,obter_jogador_atual(e)).linha;
+        if (e_vazio(c,e))
+            printf("Vazio\n");
+        if(e_peca(c))
+            printf("Peca\n");
+        printf("%d %d\n", c.coluna, c.linha);*/
+        mostrar_tabuleiro(e);
+    }
     return 1;
 }
