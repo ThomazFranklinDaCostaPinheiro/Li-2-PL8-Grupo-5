@@ -16,6 +16,7 @@ int lerfich(char filename[], ESTADO *estado);
 void mostrar_tabuleiro (ESTADO *estado);
 /** Essa função interpreta os comandos do utilizador.*/
 int interpretador(ESTADO *e);
+int char_int(char c);
 
 
 #endif //TRABALHO_DE_LI_INTERFACE_H
