@@ -62,5 +62,10 @@ JOGADA obter_jogadas(ESTADO *e,int n);
 int guardar_jogada1(ESTADO* e,int j, char cha, int l);
 /** Esta função guarda dois inteiros como coordenada do jogador 2 numa jogada. */
 int guardar_jogada2(ESTADO* e,int j, char cha, int l);
+void guarda_ultima_jog(ESTADO *e, int y, int x);
+void guarda_num_jogs(ESTADO *e, int n);
+void alteracasa(ESTADO *e, int x, int y, CASA c);
+void guarda_jogada(ESTADO *e, int j, int nj, int y, int x);
+void guarda_jogada_coord(ESTADO *e, int j, int nj, COORDENADA c);
 
 #endif //TRABALHO_DE_LI_DADOS_H
