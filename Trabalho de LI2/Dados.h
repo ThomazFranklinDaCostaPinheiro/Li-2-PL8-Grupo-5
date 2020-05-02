@@ -68,5 +68,6 @@ void guarda_num_jogs(ESTADO *e, int n);
 void alteracasa(ESTADO *e, int x, int y, CASA c);
 void guarda_jogada(ESTADO *e, int j, int nj, int y, int x);
 void guarda_jogada_coord(ESTADO *e, int j, int nj, COORDENADA c);
+void guardar_jogador(ESTADO *e, int n);
 
 #endif //TRABALHO_DE_LI_DADOS_H
