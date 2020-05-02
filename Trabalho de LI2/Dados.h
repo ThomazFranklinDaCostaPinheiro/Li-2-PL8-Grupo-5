@@ -1,6 +1,7 @@
-//
-// Created by Thomaz on 12/03/2020.
-//
+/**
+@file Dados.h
+Manipulação dos dados do estado do jogo.
+*/
 
 #ifndef TRABALHO_DE_LI_DADOS_H
 #define TRABALHO_DE_LI_DADOS_H
