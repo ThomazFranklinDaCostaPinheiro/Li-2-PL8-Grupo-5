@@ -124,3 +124,35 @@ int guardar_jogada2(ESTADO* e,int j, char cha, int l){
     e->jogadas[j].jogador2.linha = l;
     return 0;
 }
+
+void guarda_ultima_jog(ESTADO *e, int y, int x){
+    e->ultima_jogada.coluna = x;
+    e->ultima_jogada.linha = y;
+}
+
+void guarda_num_jogs(ESTADO *e, int n){
+    e->num_jogadas = n;
+}
+
+void alteracasa(ESTADO *e, int x, int y, CASA c){
+    e->tab[y][x] = c;
+}
+
+void guarda_jogada(ESTADO *e, int j, int nj, int y, int x){
+    if(j == 1) {
+        e->jogadas[nj].jogador1.coluna = x;
+        e->jogadas[nj].jogador1.linha = y;
+    }
+    else{
+        e->jogadas[nj].jogador2.coluna = x;
+        e->jogadas[nj].jogador2.linha = y;
+    }
+}
+
+void guarda_jogada_coord(ESTADO *e, int j, int nj, COORDENADA c){
+    guarda_jogada(e,j,nj,c.linha,c.coluna);
+}
+
+void guardar_jogador(ESTADO *e, int n){
+    e->jogador_atual = n;
+}
