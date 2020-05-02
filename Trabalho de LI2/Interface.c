@@ -12,7 +12,7 @@
 
 int gravar(ESTADO *estado, char filename[]){
     FILE *fp;
-    strcat(filename,".txt");
+    //strcat(filename,".txt");
     fp = fopen(filename,"w");
     int il = 7;
     int njogador;
@@ -23,15 +23,15 @@ int gravar(ESTADO *estado, char filename[]){
         int ic = 0;
         while (ic < 8){
             if (obter_casa(estado,il,ic) == UM)
-                fprintf(fp,"1 ");
+                fprintf(fp,"1");
             else if (obter_casa(estado,il,ic) == DOIS)
                 fprintf(fp,"2");
             else if (obter_casa(estado,il,ic) == VAZIO)
-                fprintf(fp,". ");
+                fprintf(fp,".");
             else if (obter_casa(estado,il,ic) == BRANCA)
-                fprintf(fp,"* ");
+                fprintf(fp,"*");
             else
-                fprintf(fp,"# ");
+                fprintf(fp,"#");
             ic++;
         }
         fprintf(fp,"\n");
@@ -44,10 +44,10 @@ int gravar(ESTADO *estado, char filename[]){
     char yc2;
     fprintf_s(fp,"\n");
     while (i < (obter_numero_de_jogadas(estado)-1)){
-        xc1 = conv_c(obter_coluna(estado,2,i));
-        yc1 = conv_l(obter_coluna(estado,1,i));
-        xc2 = conv_c(obter_linha(estado,2,i));
-        yc2 = conv_l(obter_linha(estado,1,i));
+        xc1 = conv_c(obter_coluna(estado,1,i));
+        yc1 = conv_l(obter_linha(estado,1,i));
+        xc2 = conv_c(obter_coluna(estado,2,i));
+        yc2 = conv_l(obter_linha(estado,2,i));
         fprintf(fp,"0%d: %c%c %c%c\n",i+1,xc1,yc1,xc2,yc2);
         i++;
     }
@@ -73,45 +73,63 @@ CASA qualcasa (char c){
         return VAZIO;
 }
 
-int lerfich(char filename[], ESTADO *estado){
+int lerfich(char filename[], ESTADO *estado) {
     int nl = 7;
     int nc;
     char c;
     FILE *rf;
-    strcat(filename,".txt");
-    if((rf = fopen(filename,"r")) == NULL){
+    if ((rf = fopen(filename, "r")) == NULL) {
         printf("Ficheiro nao encontrado>");
         return 0;
     }
-    while(nl >= 0){
+    while (nl >= 0) {
         nc = 0;
-        while(nc <= 7){
+        while (nc <= 7) {
             c = fgetc(rf);
-            if (c == ' ')
-                nc--;
-            else if (c == '\n')
+            if (c == '\n')
                 nc--;
             else
-                estado->tab[nl][nc] = qualcasa(c);
+                alteracasa(estado, nc, nl, qualcasa(c));
             nc++;
         }
         nl--;
     }
-    fseek(rf,3,SEEK_CUR);
-    char linha[BUF_SIZE];
-    int i = 0;
-    int j;
-    char ch1 = 'z';
-    char ch2 ='z';
-    int l1 = 9;
-    int l2 = 9;
-    while(fscanf(rf,"%2d: %c%d %c%d \n",j,ch1,l1,ch2,l2) != EOF){
-        guardar_jogada1(estado, j, ch1, l1);
-        guardar_jogada2(estado, j, ch2, l2);
+    fseek(rf, 82, SEEK_SET);
+    int nj = 0;
+    char ch1 = 'e';
+    char ch2 = 'e';
+    int l1 = 5;
+    int l2 = 5;
+    int c1 = 5;
+    int c2 = 5;
+    while (fscanf(rf, "%d: %c%d %c%d\n", &nj, &ch1, &l1, &ch2, &l2) != EOF) {
+        c1 = char_int(ch1);
+        guarda_jogada(estado, 1, nj - 1, l1 - 1, c1);
+        c2 = char_int(ch2);
+        guarda_jogada(estado, 2, nj - 1, l2 - 1, c2);
+        l2 = 5;
+        ch2 = 'e';
+    }
+    guarda_num_jogs(estado, nj + 1);
+    if ((obter_coluna(estado,2,nj) != 4)&&(obter_linha(estado,2,nj)) != 4){
+        guardar_jogador(estado, 1);
+        guarda_num_jogs(estado, nj + 1);
+        guarda_ultima_jog(estado,l2-1,c2);
+    }
+    else{
+        guardar_jogador(estado,2);
+        guarda_num_jogs(estado, nj);
+        guarda_ultima_jog(estado,l1-1,c1);
     }
     fclose(rf);
     mostrar_tabuleiro(estado);
     return 1;
+}
+
+int char_int(char c){
+    int x;
+    x = c - 'a';
+    return x;
 }
 
 void mostrar_tabuleiro (ESTADO *estado){
@@ -167,10 +185,8 @@ int interpretador(ESTADO *e) {
     if(strcmp(linha,"movs\n") == 0){
         movs(e);
     }
-    char num[2];
     int n;
-    if(sscanf(linha,"pos %s", num) == 1){
-        n = atoi(num);
+    if(sscanf(linha,"pos %d", &n) == 1){
         pos(e,n);
         mostrar_tabuleiro(e);
     }
@@ -180,14 +196,6 @@ int interpretador(ESTADO *e) {
     }
     if(strcmp(linha,"jog2\n") == 0){
         jogs2(e);
-        /**COORDENADA c;
-        c.coluna = euclidiana(e,obter_jogador_atual(e)).coluna;
-        c.linha = euclidiana(e,obter_jogador_atual(e)).linha;
-        if (e_vazio(c,e))
-            printf("Vazio\n");
-        if(e_peca(c))
-            printf("Peca\n");
-        printf("%d %d\n", c.coluna, c.linha);*/
         mostrar_tabuleiro(e);
     }
     return 1;
