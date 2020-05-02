@@ -1,6 +1,7 @@
-//
-// Created by Thomaz on 12/03/2020.
-//
+/**
+@file Interface.h
+Esta camada é responsavel por mostrar informações relacionadas ao jogo.
+ */
 
 #ifndef TRABALHO_DE_LI_INTERFACE_H
 #define TRABALHO_DE_LI_INTERFACE_H
