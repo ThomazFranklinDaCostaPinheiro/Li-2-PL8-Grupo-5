@@ -86,31 +86,28 @@ int jogar(ESTADO *e, COORDENADA c) {
     l = c.linha;
     co = c.coluna;
     if ((e_vazio(c,e)) && (e_vizinho(c, obter_coord_ult(e))) && (e_peca(c))) {
-        e->tab[yu][xu] = PRETA;
-        e->tab[l][co] = BRANCA;
+        alteracasa(e,xu,yu,PRETA);
+        alteracasa(e,co,l,BRANCA);
         if (obter_jogador_atual(e) == 1){
-            e->jogadas[e->num_jogadas-1].jogador1 = c;
-            e->jogador_atual = 2;
+            guarda_jogada_coord(e,1,obter_numero_de_jogadas(e)-1,c);
+            guardar_jogador(e,2);
         }
         else {
-            e->jogadas[e->num_jogadas-1].jogador2 = c;
-            e->jogador_atual = 1;
-            e->num_jogadas= e->num_jogadas+1;
+            guarda_jogada_coord(e,2,obter_numero_de_jogadas(e)-1,c);
+            guardar_jogador(e,1);
+            guarda_num_jogs(e,obter_numero_de_jogadas(e)+1);
         }
-        e->ultima_jogada.linha = l;
-        e->ultima_jogada.coluna = co;
+        guarda_ultima_jog(e,l,co);
     }
     else{
         printf("Jogada Invalida\n");
-        e->tab[yu][xu] = BRANCA;
+        alteracasa(e,xu,yu,BRANCA);
     }
     int nj;
-    nj = e->num_jogadas;
+    nj = obter_numero_de_jogadas(e);
     while(nj < 32){
-        e->jogadas[nj].jogador1.coluna = 4;
-        e->jogadas[nj].jogador1.linha = 4;
-        e->jogadas[nj].jogador2.coluna = 4;
-        e->jogadas[nj].jogador2.linha = 4;
+        guarda_jogada(e,1,nj,4,4);
+        guarda_jogada(e,2,nj,4,4);
         nj++;
     }
     return 1;
@@ -161,24 +158,24 @@ ESTADO * reset_tab (ESTADO *e){
     while (i2 < 8) {
         int i3 = 0;
         while (i3 < 8) {
-            e->tab[i2][i3] = VAZIO;
+            alteracasa(e,i2,i3,VAZIO);
             i3++;
         }
         i2++;
     }
-    e -> tab[0][0] = UM;
-    e -> tab[7][7] = DOIS;
-    e -> tab[4][4] = PRETA;
+    alteracasa(e,0,0,UM);
+    alteracasa(e,7,7,DOIS);
+    alteracasa(e,4,4,PRETA);
     return e;
 }
 
 int *desenha_jogada(ESTADO *e, JOGADA jogada){
     int x1 = jogada.jogador1.coluna;
     int y1 = jogada.jogador1.linha;
-    e->tab[y1][x1] = PRETA;
+    alteracasa(e,x1,y1,PRETA);
     int x2 = jogada.jogador2.coluna;
     int y2 = jogada.jogador2.linha;
-    e->tab[y2][x2] = PRETA;
+    alteracasa(e,x2,y2,PRETA);
     return 0;
 }
 
@@ -189,13 +186,10 @@ ESTADO *pos (ESTADO *e, int i){
     reset_tab(e);
     int x;
     int y;
-    int a;
-    int b;
     if (i == 0){
         reset_tab(e);
-        e->tab[4][4] = BRANCA;
-        e->ultima_jogada.linha = 4;
-        e->ultima_jogada.coluna = 4;
+        alteracasa(e,4,4,BRANCA);
+        guarda_ultima_jog(e,4,4);
     }
     else{
         while (in < i){
@@ -206,27 +200,18 @@ ESTADO *pos (ESTADO *e, int i){
         if(obter_linha(e,2,in-1) == 9){
             y = obter_linha(e,1,in-1);
             x = obter_coluna(e,1,in-1);
-            e->tab[y][x] = BRANCA;
-            e->ultima_jogada.coluna = x;
-            e->ultima_jogada.linha = y;
-            e->num_jogadas = i;
+            alteracasa(e,x,y,BRANCA);
+            guarda_ultima_jog(e,y,x);
+            guarda_num_jogs(e,i);
         }
         else{
             y = obter_linha(e,2,in-1);
             x = obter_coluna(e,2,in-1);
-            e->tab[y][x] = BRANCA;
-            e->ultima_jogada.coluna = x;
-            e->ultima_jogada.linha = y;
-            e->num_jogadas = i + 1;
+            alteracasa(e,x,y,BRANCA);
+            guarda_ultima_jog(e,y,x);
+            guarda_num_jogs(e,i);
         }
     }
-}
-
-COORDENADA offset(COORDENADA c, int x, int y){
-    COORDENADA r;
-    r.linha = c.linha + y;
-    r.coluna = c.coluna + x;
-    return r;
 }
 
 LISTA casas_disp(ESTADO *e){
@@ -317,17 +302,15 @@ COORDENADA euclidiana(LISTA l, int player){
     casa2.coluna = 7;
     casa2.linha = 7;
     c = *(COORDENADA *)devolve_cabeca(l);
-    while (!lista_esta_vazia(l) && !lista_esta_vazia(l->proximo)){
+    while (!lista_esta_vazia(l) && !lista_esta_vazia(proximo(l))){
         cabeca = *(COORDENADA *)(devolve_cabeca(l));
         if(player == 1){
             if(distancia(cabeca,casa1) < distancia(c,casa1)){
-                printf("%d ",distancia(cabeca,casa1));
                 c = cabeca;
             }
         }
         else{
             if(distancia(cabeca,casa2) < distancia(c,casa2)){
-                printf("%d ",distancia(cabeca,casa2));
                 c = cabeca;
             }
         }
@@ -339,4 +322,22 @@ COORDENADA euclidiana(LISTA l, int player){
 int jogs2(ESTADO *e){
     jogar(e,euclidiana(casas_disp(e),obter_jogador_atual(e)));
     return 0;
+}
+
+COORDENADA altera_coord(COORDENADA c, int x, int y){
+    c.coluna = c.coluna + x;
+    c.linha = c.linha + y;
+    return c;
+}
+
+COORDENADA flood(ESTADO *e){
+    int flood[8][8];
+    int x;
+    int y;
+
+}
+
+int floodaux(ESTADO *es, int flood[8][8], COORDENADA c, int val){
+    
+
 }
