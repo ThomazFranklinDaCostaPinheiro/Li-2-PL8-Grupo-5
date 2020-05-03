@@ -44,13 +44,13 @@ int gravar(ESTADO *estado, char filename[]){
         yc1 = conv_l(obter_linha(estado,1,i));
         xc2 = conv_c(obter_coluna(estado,2,i));
         yc2 = conv_l(obter_linha(estado,2,i));
-        fprintf(fp,"0%d: %c%c %c%c\n",i+1,xc1,yc1,xc2,yc2);
+        fprintf(fp,"%02d: %c%c %c%c\n",i+1,xc1,yc1,xc2,yc2);
         i++;
     }
     if (obter_jogador_atual(estado) == 2) {
         xc1 = conv_c(obter_coluna(estado,1,i));
         yc1 = conv_l(obter_linha(estado,1,i));
-        fprintf(fp,"0%d: %c%c",obter_numero_de_jogadas(estado),xc1,yc1);
+        fprintf(fp,"%02d: %c%c",obter_numero_de_jogadas(estado),xc1,yc1);
     }
     fclose(fp);
     return(0);
