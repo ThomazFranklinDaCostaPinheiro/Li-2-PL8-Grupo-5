@@ -1,12 +1,8 @@
 #include "dados.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "listas.h"
-#include "Interface.h"
+#include "interface.h"
 #include <math.h>
-
-
 
 int quem_ganha(ESTADO *estado){
     if (((obter_linha_ult(estado) == 0)&&(obter_coluna_ult(estado) == 0)) || (obter_jogador_atual(estado) == 2))
@@ -14,7 +10,6 @@ int quem_ganha(ESTADO *estado){
     else
         return 2;
 }
-
 
 int encurralado(ESTADO *estado){
     COORDENADA c;
@@ -42,7 +37,6 @@ int e_vizinho (COORDENADA c1, COORDENADA c2){
         return 0;
 }
 
-
 int e_vazio (COORDENADA c3, ESTADO* state){
     int x3;
     int y3;
@@ -53,7 +47,6 @@ int e_vazio (COORDENADA c3, ESTADO* state){
     else
         return 0;
 }
-
 
 int e_peca (COORDENADA c){
     if (((c.coluna >= 0)&&(c.coluna <= 7))&&((c.linha >= 0)&&(c.linha <= 7)))
@@ -119,67 +112,6 @@ int jogar(ESTADO *e, COORDENADA c) {
     return 1;
 }
 
-ESTADO * reset_tab (ESTADO *e){
-    int i2 = 0;
-    while (i2 < 8) {
-        int i3 = 0;
-        while (i3 < 8) {
-            alteracasa(e,i2,i3,VAZIO);
-            i3++;
-        }
-        i2++;
-    }
-    alteracasa(e,0,0,UM);
-    alteracasa(e,7,7,DOIS);
-    alteracasa(e,4,4,PRETA);
-    return e;
-}
-
-int *desenha_jogada(ESTADO *e, JOGADA jogada){
-    int x1 = jogada.jogador1.coluna;
-    int y1 = jogada.jogador1.linha;
-    alteracasa(e,x1,y1,PRETA);
-    int x2 = jogada.jogador2.coluna;
-    int y2 = jogada.jogador2.linha;
-    alteracasa(e,x2,y2,PRETA);
-    return 0;
-}
-
-
-void pos (ESTADO *e, int i){
-    int in = 0;
-    JOGADA play;
-    reset_tab(e);
-    int x;
-    int y;
-    if (i == 0){
-        reset_tab(e);
-        alteracasa(e,4,4,BRANCA);
-        guarda_ultima_jog(e,4,4);
-    }
-    else{
-        while (in < i){
-            play = obter_jogadas(e, in);
-            desenha_jogada(e,play);
-            in++;
-        }
-        if(obter_linha(e,2,in-1) == 9){
-            y = obter_linha(e,1,in-1);
-            x = obter_coluna(e,1,in-1);
-            alteracasa(e,x,y,BRANCA);
-            guarda_ultima_jog(e,y,x);
-            guarda_num_jogs(e,i);
-        }
-        else{
-            y = obter_linha(e,2,in-1);
-            x = obter_coluna(e,2,in-1);
-            alteracasa(e,x,y,BRANCA);
-            guarda_ultima_jog(e,y,x);
-            guarda_num_jogs(e,i);
-        }
-    }
-}
-
 LISTA casas_disp(ESTADO *e,COORDENADA c) {
     LISTA l = criar_lista();
     COORDENADA *c1 = malloc(sizeof(NODO));
@@ -207,25 +139,6 @@ LISTA casas_disp(ESTADO *e,COORDENADA c) {
     if (e_peca(*c7)&&(e_vazio(*c7,e))) l = insere_cabeca(l, c7);
     if (e_peca(*c8)&&(e_vazio(*c8,e))) l = insere_cabeca(l, c8);
     return l;
-}
-
-COORDENADA rand_coord(LISTA l){
-    srand((unsigned)time(NULL));
-    int n;
-    n = (rand() %7);
-    while ((proximo(l)) && (n > 0)){
-        l = remove_cabeca(l);
-        n--;
-    }
-    COORDENADA c = *(COORDENADA *) devolve_cabeca(l);
-    while (!lista_esta_vazia(l))
-        l = remove_cabeca(l);
-    return c;
-}
-
-int jogs(ESTADO *e){
-    jogar(e,rand_coord(casas_disp(e,obter_coord_ult(e))));
-    return 0;
 }
 
 double distancia(COORDENADA c1, COORDENADA c2){
