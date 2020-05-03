@@ -98,17 +98,29 @@ int guardar_jogada1(ESTADO* e,int j, char cha, int l);
 \brief Esta função guarda dois inteiros como coordenada do jogador 2 numa jogada. 
 */
 int guardar_jogada2(ESTADO* e,int j, char cha, int l);
-
+/**
+\brief Esta função guarda a coordenada que recebe a ultima jogada.
+*/
 void guarda_ultima_jog(ESTADO *e, int y, int x);
-
+/**
+\brief Esta função guarda o numero de jogadas.
+*/
 void guarda_num_jogs(ESTADO *e, int n);
-
+/**
+\brief Esta funçao recebe uma coordenada e substitui pela coordenada que recebe.
+*/
 void alteracasa(ESTADO *e, int x, int y, CASA c);
-
+/**
+\brief Esta função guarda uma jogada consoante ao jogador e numero da jogada.
+*/
 void guarda_jogada(ESTADO *e, int j, int nj, int y, int x);
-
+/**
+\brief Esta função recebe uma coordenada e a guarda na jogada.
+*/
 void guarda_jogada_coord(ESTADO *e, int j, int nj, COORDENADA c);
-
+/**
+\brief Essa função guarda o jogador atual.
+*/
 void guardar_jogador(ESTADO *e, int n);
 
 #endif //TRABALHO_DE_LI_DADOS_H
