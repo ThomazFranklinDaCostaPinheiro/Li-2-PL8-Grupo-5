@@ -21,7 +21,7 @@ int gravar(ESTADO *estado, char filename[]){
         }
         fprintf(fp,"\n"); il--;
     }
-    int i = 0; char xc1; char yc1; char xc2; char yc2; fprintf_s(fp,"\n");
+    int i = 0; char xc1; char yc1; char xc2; char yc2; fprintf(fp,"\n");
     while (i < (obter_numero_de_jogadas(estado)-1)){
         xc1 = conv_c(obter_coluna(estado,1,i));
         yc1 = conv_l(obter_linha(estado,1,i));
