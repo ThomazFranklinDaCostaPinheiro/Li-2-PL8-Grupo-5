@@ -38,7 +38,7 @@ int gravar(ESTADO *estado, char filename[]){
     char yc1;
     char xc2;
     char yc2;
-    fprintf_s(fp,"\n");
+    fprintf(fp,"\n");
     while (i < (obter_numero_de_jogadas(estado)-1)){
         xc1 = conv_c(obter_coluna(estado,1,i));
         yc1 = conv_l(obter_linha(estado,1,i));
