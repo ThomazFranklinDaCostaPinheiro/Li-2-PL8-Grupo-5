@@ -88,17 +88,6 @@ COORDENADA obter_coord_ult(ESTADO *e){
     return e->ultima_jogada;
 }
 
-COORDENADA obter_coord(ESTADO *e, int player, int jogada){
-    if (player == 2)
-        return  e->jogadas[jogada].jogador2;
-    else
-        return  e->jogadas[jogada].jogador1;
-}
-
-JOGADA obter_jogadas(ESTADO *e,int n){
-    return e->jogadas[n];
-}
-
 void guarda_ultima_jog(ESTADO *e, int y, int x){
     e->ultima_jogada.coluna = x;
     e->ultima_jogada.linha = y;
