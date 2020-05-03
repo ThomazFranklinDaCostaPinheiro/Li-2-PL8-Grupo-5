@@ -8,34 +8,20 @@
 #include <stdio.h>
 
 int gravar(ESTADO *estado, char filename[]){
-    FILE *fp;
-    //strcat(filename,".txt");
-    fp = fopen(filename,"w");
-    int il = 7;
+    FILE *fp; fp = fopen(filename,"w"); int il = 7;
     while (il >= 0){
         int ic = 0;
         while (ic < 8){
-            if (obter_casa(estado,il,ic) == UM)
-                fprintf(fp,"1");
-            else if (obter_casa(estado,il,ic) == DOIS)
-                fprintf(fp,"2");
-            else if (obter_casa(estado,il,ic) == VAZIO)
-                fprintf(fp,".");
-            else if (obter_casa(estado,il,ic) == BRANCA)
-                fprintf(fp,"*");
-            else
-                fprintf(fp,"#");
+            if (obter_casa(estado,il,ic) == UM) fprintf(fp,"1");
+            else if (obter_casa(estado,il,ic) == DOIS) fprintf(fp,"2");
+            else if (obter_casa(estado,il,ic) == VAZIO) fprintf(fp,".");
+            else if (obter_casa(estado,il,ic) == BRANCA) fprintf(fp,"*");
+            else fprintf(fp,"#");
             ic++;
         }
-        fprintf(fp,"\n");
-        il--;
+        fprintf(fp,"\n"); il--;
     }
-    int i = 0;
-    char xc1;
-    char yc1;
-    char xc2;
-    char yc2;
-    fprintf_s(fp,"\n");
+    int i = 0; char xc1; char yc1; char xc2; char yc2; fprintf_s(fp,"\n");
     while (i < (obter_numero_de_jogadas(estado)-1)){
         xc1 = conv_c(obter_coluna(estado,1,i));
         yc1 = conv_l(obter_linha(estado,1,i));
@@ -49,8 +35,7 @@ int gravar(ESTADO *estado, char filename[]){
         yc1 = conv_l(obter_linha(estado,1,i));
         fprintf(fp,"%02d: %c%c",obter_numero_de_jogadas(estado),xc1,yc1);
     }
-    fclose(fp);
-    return(0);
+    fclose(fp); return(0);
 }
 
 
