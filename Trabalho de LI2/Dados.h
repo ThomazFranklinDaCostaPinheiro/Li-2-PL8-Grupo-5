@@ -60,10 +60,6 @@ int obter_jogador_atual(ESTADO *estado);
 */
 int obter_numero_de_jogadas(ESTADO *estado);
 /**
-\brief Esta função obtém qual o tipo de peça que determinada casa do tabuleiro é.
-*/
-CASA obter_estado_casa(ESTADO *e, COORDENADA c);
-/**
 \brief Esta função obtém a casa associada a uma linha e uma coluna.
 */
 CASA obter_casa(ESTADO *e, int y, int x);
