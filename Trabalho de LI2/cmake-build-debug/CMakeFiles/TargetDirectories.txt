@@ -1,3 +1,0 @@
-C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/Trabalho_de_LI2.dir
-C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/danie/CLionProjects/Trabalho de LI2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
