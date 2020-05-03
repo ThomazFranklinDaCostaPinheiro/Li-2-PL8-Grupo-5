@@ -15,10 +15,6 @@ int gravar(ESTADO *estado, char filename[]){
     //strcat(filename,".txt");
     fp = fopen(filename,"w");
     int il = 7;
-    int njogador;
-    int jogadatual;
-    njogador = obter_jogador_atual(estado);
-    jogadatual = obter_numero_de_jogadas(estado);
     while (il >= 0){
         int ic = 0;
         while (ic < 8){
@@ -60,18 +56,6 @@ int gravar(ESTADO *estado, char filename[]){
     return(0);
 }
 
-CASA qualcasa (char c){
-    if (c == '#')
-        return PRETA;
-    else if (c == '*')
-        return BRANCA;
-    else if (c == '2')
-        return DOIS;
-    else if (c == '1')
-        return UM;
-    else
-        return VAZIO;
-}
 
 int lerfich(char filename[], ESTADO *estado) {
     int nl = 7;
@@ -85,7 +69,7 @@ int lerfich(char filename[], ESTADO *estado) {
     while (nl >= 0) {
         nc = 0;
         while (nc <= 7) {
-            c = fgetc(rf);
+            c = (char)fgetc(rf);
             if (c == '\n')
                 nc--;
             else
@@ -95,18 +79,18 @@ int lerfich(char filename[], ESTADO *estado) {
         nl--;
     }
     fseek(rf, 82, SEEK_SET);
-    int nj = 0;
+    char nj;
     char ch1 = 'e';
     char ch2 = 'e';
-    int l1 = 5;
-    int l2 = 5;
+    char l1 = 5;
+    char l2 = 5;
     int c1 = 5;
     int c2 = 5;
-    while (fscanf(rf, "%d: %c%d %c%d\n", &nj, &ch1, &l1, &ch2, &l2) != EOF) {
+    while (fscanf(rf, "%c: %c%c %c%c\n", &nj, &ch1, &l1, &ch2, &l2) != EOF) {
         c1 = char_int(ch1);
-        guarda_jogada(estado, 1, nj - 1, l1 - 1, c1);
+        guarda_jogada(estado, 1, char_int(nj) - 1, char_int(l1) - 1, c1);
         c2 = char_int(ch2);
-        guarda_jogada(estado, 2, nj - 1, l2 - 1, c2);
+        guarda_jogada(estado, 2, char_int(nj) - 1, char_int(l2) - 1, c2);
         l2 = 5;
         ch2 = 'e';
     }
@@ -185,9 +169,9 @@ int interpretador(ESTADO *e) {
     if(strcmp(linha,"movs\n") == 0){
         movs(e);
     }
-    int n;
-    if(sscanf(linha,"pos %d", &n) == 1){
-        pos(e,n);
+    char n;
+    if(sscanf(linha,"pos %c", &n ) == 1){
+        pos(e,(int)(n-'0'));
         mostrar_tabuleiro(e);
     }
     if(strcmp(linha,"jog\n") == 0){
@@ -199,4 +183,39 @@ int interpretador(ESTADO *e) {
         mostrar_tabuleiro(e);
     }
     return 1;
+}
+
+int write_coord(COORDENADA coord){
+    int x;
+    int y;
+    x = coord.coluna;
+    y = coord.linha;
+    char xc;
+    char yc;
+    xc = conv_c(x);
+    yc = conv_l(y);
+    printf("%c%c ",xc,yc);
+    return 0;
+}
+
+int movs(ESTADO *e){
+    int i = 0;
+    while (i < (obter_numero_de_jogadas(e)-1)){
+        printf("j%d: ",(i+1));
+        write_coord(obter_coord(e, 1, i));
+        write_coord(obter_coord(e, 2, i));
+        printf("\n");
+        i++;
+    }
+    if (obter_jogador_atual(e) == 2) {
+        printf("j%d: ",i+1);
+        write_coord(obter_coord(e, 1, i));
+    }
+    printf("\n>");
+    return 0;
+}
+
+void erros(int n){
+    if(n==1)
+        printf("Jogada Invalida\n");
 }
