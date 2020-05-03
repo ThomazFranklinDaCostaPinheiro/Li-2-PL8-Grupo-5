@@ -12,11 +12,15 @@ Essa camada é responsável pela lógica por tras do jogo.
 
 /**
 \brief Essa função determina quem foi o vencedor do jogo.
+@param estado O estado do jogo.
+@returns O número do jogador que vence.
 */
 int quem_ganha(ESTADO *estado);
 
 /**
 \brief Essa função indica se um jogador está encurralado, ou seja, sem possibilidades de jogar.
+@param estado O estado do Jogo.
+@returns 1 se o jogador estiver encurralado e 0 caso cntrário.
 */
 int encurralado(ESTADO *estado);
 
@@ -39,19 +43,21 @@ int e_vazio (COORDENADA c3, ESTADO* state);
 /**
 \brief Função que verifica se a coordenada pertence ao tabuleiro.
 @param c Coordenada a ser verificada
-@return Se for peça = 1, se não for = 0.
+@returns Se for peça = 1, se não for = 0.
 */
 int e_peca (COORDENADA c);
 
 /**
 \brief Função que devolve a casa associada com o caracter 
 @param c caracter a ser testado
-@return casa associada ao caracter
+@returns casa associada ao caracter
  */
 CASA qualcasa (char c);
 
 /**
 \brief Essa função determina se um jogador venceu.
+@param estado O estado do jogo.
+@returns 0 se alguém vencer e 1 se não houver vencedor.
 */
 int vencer(ESTADO *estado);
 
@@ -63,6 +69,7 @@ int jogar(ESTADO *e, COORDENADA c);
 
 /**
 \brief Função que limpa o tabuleiro
+@param e O estado do jogo.
 */
 ESTADO * reset_tab (ESTADO *e);
 
@@ -82,7 +89,8 @@ void pos (ESTADO *e, int i);
 
 /**
 \brief Cria uma lista das casas disponiveis em torno da peça branca
-@param e Estado atual do tabuleiro
+@param e Estado atual do tabuleiro.
+@param c A coordenada a ser testada.
 */
 LISTA casas_disp(ESTADO *e, COORDENADA c);
 
@@ -100,16 +108,23 @@ int jogs(ESTADO *e);
 
 /**
 \brief Calcula a distancia entre dois pontos.
+@param c1 A primeira coordenada.
+@param c2 A segunda coordenada.
+@returns r A distância euclidiana.
 */
 double distancia(COORDENADA c1, COORDENADA c2);
 
 /**
 \brief Devolve uma coordenada segundo a heuristica da distancia euclidiana.
+@param l Lista de coordenadas disponiveis.
+@param player O jogador em questão.
+@returns c A coordenada do jogador em questão.
 */
 COORDENADA euclidiana(LISTA l, int player);
 
 /**
 \brief Realiza uma jogada segundo um algoritmo de distância euclidiana.
+@param e O estado em que vai ser feita a jogada
 */
 int jogs2(ESTADO *e);
 
