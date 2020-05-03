@@ -35,6 +35,9 @@ void mostrar_tabuleiro (ESTADO *estado);
 \brief Essa função interpreta os comandos do utilizador.
 */
 int interpretador(ESTADO *e);
+/**
+\brief Esta função escreve uma mensagem de erro.
+*/
 void erros(int n);
 
 
